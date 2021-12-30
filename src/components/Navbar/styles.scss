@@ -3,6 +3,13 @@
   font: 48px/1.2 "Rock Salt", Helvetica, Arial, serif;
   letter-spacing: '0px';
 }
+.mainTitle, .nav-option {
+  user-select: none; /* standard syntax */
+  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+  -moz-user-select: none; /* mozilla browsers */
+  -khtml-user-select: none; /* webkit (konqueror) browsers */
+  -ms-user-select: none; /* IE10+ */  
+}
 .nav-option {
   font: 28px/1.2 "Brawler", Helvetica, Arial, serif;
   color: rgb(192,192,192);
@@ -14,6 +21,9 @@
     text-align: center
   }
 }
-.nav-option:hover, .nav-option:focus {
+.nav-option:hover {
+  color: rgb(0,174,182);
+}
+.nav-focused {
   color: rgb(0,174,182);
 }

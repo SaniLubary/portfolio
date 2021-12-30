@@ -3,6 +3,10 @@ html {
   color: rgb(239,239,239);
 }
 
+.body {
+  padding-top: 12vh;
+}
+
 .descargar-cv-box {
   margin-top: 15px;
   padding: 0.5em 1.25em;
@@ -12,9 +16,8 @@ html {
   box-sizing: border-box;
   border-radius: 43px;
   
-  font-family: 700 21px/1.2 "Poppins";
+  font-family: 700 16px/1.2 "Poppins";
   font-weight: bold;
-  font-size: 21px;
   line-height: 31px;
 
   color: #00ADB5;
@@ -28,10 +31,9 @@ html {
 }
 
 .left-title {
-  font: 38px/1.2 "Brawler", Helvetica, Arial, serif;
+  font: 44px/1.2 "Brawler", Helvetica, Arial, serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 58px;
   line-height: 71px;
 
   letter-spacing: 0px;
@@ -39,7 +41,8 @@ html {
 }
 
 .greetings {
-  font: 38px/1.2 "Brawler", Helvetica, Arial, serif;
+  font-size: 0.65em;
+  line-height: 1.2;
 
   @media (max-width: 991.98px) {
     font-size: 35px;
@@ -50,7 +53,6 @@ html {
 }
 
 .presentation {
-  font: 58px/1.2 "Brawler", Helvetica, Arial, serif;
   text-align: left;
 
   

@@ -1,15 +1,14 @@
-import React from "react"; 
 import { Disclosure } from "@headlessui/react";
 import './styles.scss'
+import Menus from "../enums";
 
-const Menus = {
-  Experiencia: "Experiencia",
-  Aptitudes: "Aptitudes",
-  Conectemos: "Conectemos!"
-}
-
-export default function Navbar() {
+export default function Navbar(props: any) {
+  const showMenu = (menu: string) => {
+    props.view !== menu && props.setView(menu)
+  }
+  
   const navigation = [Menus.Experiencia, Menus.Aptitudes, Menus.Conectemos];
+  
   return (
     <>
       <div className="w-full">
@@ -20,14 +19,14 @@ export default function Navbar() {
               <>
                 <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
                   <div>
-                    <a className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100">
+                    <a onClick={() => showMenu(Menus.Main)} className="cursor-pointer">
                       <div className="mainTitle">Santi Lubary</div>
                     </a>
                   </div>
 
                   <Disclosure.Button
                     aria-label="Toggle Menu"
-                    className="px-2 py-1 ml-auto text-gray-500 rounded-md lg:hidden hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:text-gray-300 dark:focus:bg-gray-700">
+                    className="px-2 py-1 ml-auto lg:hidden focus:outline-none dark:text-gray-300">
                     <svg
                       className="w-6 h-6 fill-current"
                       xmlns="http://www.w3.org/2000/svg"
@@ -50,18 +49,13 @@ export default function Navbar() {
 
                   <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">
                     <>
-                      {navigation.map((item, index) => (
+                      {navigation.map((menu, index) => (
                         <div key={index}>
-                          <a href={`#${item}`} className="nav-option w-full px-4 py-2 -ml-4 dark:text-gray-300 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-700">
-                            {item}
+                          <a href={`#${menu}`} className={`nav-option cursor-pointer flex items-center justify-center text-center px-4 py-2 ${props.view === menu && 'nav-focused'}`}>
+                            {menu}
                           </a>
                         </div>
                       ))}
-                      <div>
-                        <a className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5">
-                          Conectemos!
-                        </a>
-                      </div>
                     </>
                   </Disclosure.Panel>
                 </div>
@@ -75,7 +69,7 @@ export default function Navbar() {
               {navigation.map((menu, index) => (
                 <li className="mr-3 nav__item" key={index}>
                   <div>
-                    <a className="nav-option cursor-pointer flex items-center justify-center text-center px-4 py-2">
+                    <a onClick={() => showMenu(menu)} className={`nav-option cursor-pointer flex items-center justify-center text-center px-4 py-2 ${props.view === menu && 'nav-focused'}`}>
                       {menu}
                     </a>
                   </div>
