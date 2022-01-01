@@ -1,11 +1,11 @@
-export default function ExperienciaBody() {
+export default function AptitudesBody() {
   return (
     <div className="show body container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:justify-between">
         {/* Left */}
         <div className="flex-col w-4/7">
           <div className="left-title flex-col overflow-visible">
             <h1 className="greetings flex relative items-start justify-start text-left">
-              Experiencia
+              aptitudes
             </h1>
             <div className="presentation overflow-visible">
               asdf

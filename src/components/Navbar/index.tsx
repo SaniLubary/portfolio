@@ -1,13 +1,50 @@
-import { Disclosure } from "@headlessui/react";
+import { useEffect, useRef, useState } from "react";
+import { Disclosure, Menu } from "@headlessui/react";
 import './styles.scss'
 import Menus from "../enums";
 
 export default function Navbar(props: any) {
-  const showMenu = (menu: string) => {
-    props.view !== menu && props.setView(menu)
-  }
+  const [focusView, setFocusView] = useState(Menus.Main)
+  const previousView = useRef(focusView)
+  
+  useEffect(() => {
+    previousView.current = focusView
+  }, [focusView])
   
   const navigation = [Menus.Experiencia, Menus.Aptitudes, Menus.Conectemos];
+  
+  /**
+   * View state will change after focusView, with a timeOut
+   *  as to give time for animations to finish
+   * @param menu Clicked menu name
+   */
+  const showMenu = (menu: string) => {    
+    const menu_ = props.view.current === menu ? Menus.Main : menu
+    
+    setFocusView(menu_)
+    setTimeout(() => {
+      props.setView({current: menu_, waitingAnimation: ''})
+    }, 300);
+    
+    console.log('aca deberia modificarse view asi', {current: menu_, waitingAnimation: previousView.current})
+
+    props.setView({current: menu_, waitingAnimation: previousView.current})
+
+    
+    const bodyChildrens = (document.getElementById("body-container") as HTMLDivElement)?.children[0] ? 
+      Array.from((document.getElementById("body-container") as HTMLDivElement)?.children[0]?.children) as HTMLDivElement[] 
+      : []
+
+    if (bodyChildrens) {
+      while (bodyChildrens.length) {
+        const shifted = bodyChildrens.shift()
+        const popped = bodyChildrens.pop()
+
+        shifted && shifted.classList.add('removeLeft')
+        popped && popped.classList.add('removeRight')
+      }
+    } else props.view.current !== menu_ && props.setView({current: menu_, waitingAnimation: previousView.current})
+  }
   
   return (
     <>
@@ -19,7 +56,7 @@ export default function Navbar(props: any) {
               <>
                 <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
                   <div>
-                    <a onClick={() => showMenu(Menus.Main)} className="cursor-pointer">
+                    <a onClick={() => props.view.current !== Menus.Main && showMenu(Menus.Main)} className="cursor-pointer">
                       <div className="mainTitle">Santi Lubary</div>
                     </a>
                   </div>
@@ -51,7 +88,7 @@ export default function Navbar(props: any) {
                     <>
                       {navigation.map((menu, index) => (
                         <div key={index}>
-                          <a href={`#${menu}`} className={`nav-option cursor-pointer flex items-center justify-center text-center px-4 py-2 ${props.view === menu && 'nav-focused'}`}>
+                          <a onClick={() => showMenu(menu)} className={`nav-option cursor-pointer flex items-center justify-center text-center px-4 py-2 ${focusView === menu && 'nav-focused'}`}>
                             {menu}
                           </a>
                         </div>
@@ -69,7 +106,7 @@ export default function Navbar(props: any) {
               {navigation.map((menu, index) => (
                 <li className="mr-3 nav__item" key={index}>
                   <div>
-                    <a onClick={() => showMenu(menu)} className={`nav-option cursor-pointer flex items-center justify-center text-center px-4 py-2 ${props.view === menu && 'nav-focused'}`}>
+                    <a onClick={() => showMenu(menu)} className={`nav-option cursor-pointer flex items-center justify-center text-center px-4 py-2 ${focusView === menu && 'nav-focused'}`}>
                       {menu}
                     </a>
                   </div>
