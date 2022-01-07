@@ -4,7 +4,7 @@ import Menus from "./components/enums"
 import { useState } from "react"
 import MainBody from "./components/MainBody"
 import ExperienciaBody from "./components/ExperienciaBody"
-import AptitudesBody from "./components/AptitudesBody"
+import SobreMiBody from "./components/SobreMiBody"
 
 function App() {
   const [view, setView] = useState({current: Menus.Main, waitingAnimation: ''})
@@ -28,8 +28,8 @@ function RenderBody({ menu }: { menu: string }) {
     return <MainBody />
   } else if (menu === Menus.Experiencia) {
     return <ExperienciaBody />
-  } else if (menu === Menus.Aptitudes) {
-    return <AptitudesBody />
+  } else if (menu === Menus.SobreMi) {
+    return <SobreMiBody />
   } else if (menu === Menus.Conectemos) {
     return <></>
   } else return <></>

@@ -11,7 +11,7 @@ export default function Navbar(props: any) {
     previousView.current = focusView
   }, [focusView])
   
-  const navigation = [Menus.Experiencia, Menus.Aptitudes, Menus.Conectemos];
+  const navigation = [Menus.SobreMi, Menus.Experiencia, Menus.Conectemos];
   
   /**
    * View state will change after focusView, with a timeOut
@@ -26,8 +26,6 @@ export default function Navbar(props: any) {
       props.setView({current: menu_, waitingAnimation: ''})
     }, 300);
     
-    console.log('aca deberia modificarse view asi', {current: menu_, waitingAnimation: previousView.current})
-
     props.setView({current: menu_, waitingAnimation: previousView.current})
 
     

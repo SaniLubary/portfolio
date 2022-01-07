@@ -1,7 +1,7 @@
 const Menus = {
   Main: "Main",
+  SobreMi: "Sobre Mi",
   Experiencia: "Experiencia",
-  Aptitudes: "Aptitudes",
   Conectemos: "Conectemos!"
 }
 

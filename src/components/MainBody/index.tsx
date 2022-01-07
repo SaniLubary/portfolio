@@ -1,6 +1,6 @@
 export default function MainBody() {
   return (
-    <div className="show body container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:justify-between">
+    <div className="show body container relative flex flex-wrap items-center justify-between p-8 mx-auto">
         {/* Left */}
         <div className="flex-col w-4/7">
           <div className="left-title flex-col overflow-visible">
