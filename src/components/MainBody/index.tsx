@@ -12,7 +12,7 @@ export default function MainBody() {
               Full - Stack
             </div>
           </div>
-          <button className="descargar-cv-box flex items-center justify-center">
+          <button className="download-resume-box flex items-center justify-center">
             descargar CV
           </button>
         </div>
