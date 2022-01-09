@@ -1,10 +1,10 @@
-import Navbar from "./components/Navbar"
+import Navbar from "./pages/Navbar"
 import './app.scss'
 import Menus from "./components/enums"
 import { useState } from "react"
-import MainBody from "./components/MainBody"
-import ExperienciaBody from "./components/ExperienciaBody"
-import SobreMiBody from "./components/SobreMiBody"
+import MainBody from "./pages/MainBody"
+import ExperienciaBody from "./pages/ExperienciaBody"
+import SobreMiBody from "./pages/SobreMiBody"
 
 function App() {
   const [view, setView] = useState({current: Menus.Main, waitingAnimation: ''})

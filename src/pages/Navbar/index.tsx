@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Disclosure, Menu } from "@headlessui/react";
 import './styles.scss'
-import Menus from "../enums";
+import Menus from "../../components/enums";
 
 export default function Navbar(props: any) {
   const [focusView, setFocusView] = useState(Menus.Main)
