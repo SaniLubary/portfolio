@@ -1,7 +1,7 @@
 import { ReactElement, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
-export default function EcperienceSlider({children}: {children: ReactElement[]}) {
+export default function EcperienceSlider({children}: {children: ReactElement[] | ReactElement}) {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const handleLeftArrowClick = () => {
@@ -28,10 +28,10 @@ export default function EcperienceSlider({children}: {children: ReactElement[]})
             </div>
           </div>
           <div>
-            {children[currentSlide]}
+            {Array.isArray(children) ? children[currentSlide] : children}
             <div className="flex justify-center mt-4">
               <div className="w-1/2 flex justify-around">
-                {children.map((el, i) => <div onClick={() => setCurrentSlide(i)} className={`w-4 h-4 cursor-pointer border-gray-200 border-2 rounded-full ${i === currentSlide && 'bg-slate-100'}`}></div>)}
+                {Array.isArray(children) && children.map((el, i) => <div onClick={() => setCurrentSlide(i)} className={`w-4 h-4 cursor-pointer border-gray-200 border-2 rounded-full ${i === currentSlide && 'bg-slate-100'}`}></div>)}
               </div>
             </div>
           </div>

@@ -3,6 +3,10 @@ import './styles.scss'
 
 import andesLandingPage from '../../assets/project-images/andes landing page.png'
 import andesApp from '../../assets/project-images/andes app.png'
+import portfolioSketch from '../../assets/project-images/portfolio sketch.png'
+import portfolioProcess1 from '../../assets/project-images/portfolio process 1.png'
+import portfolioProcess2 from '../../assets/project-images/portfolio process 2.png'
+import typesu from '../../assets/project-images/typesu.png'
 
 import reactIcon from '../../assets/icons/react-icon.png'
 import nodejsIcon from '../../assets/icons/nodejs-icon.png'
@@ -26,8 +30,8 @@ export default function ExperienciaBody() {
       {/* EXPERIENCE TIMELINE */}
 
       <div className="grid custom-grid-template-cols-left grid-cols-3">
-        <div className="flex flex-col jusfify-center items-center col-start-1 col-end-4 text-xl mb-36">
-          Equipos de los que forme parte!
+        <div className="flex flex-col items-start col-start-1 col-end-4 text-4xl mb-20 2xl:ml-28 xl:ml-20 md:ml-12 sm:ml-0 2xl:w-1/4 xl:w-1/3 sm:w-1/2">
+          Equipos en los que forme parte!
         </div>
 
         <div className='flex flex-col justify-center items-center'>
@@ -62,7 +66,7 @@ export default function ExperienciaBody() {
             <img className='w-8 h-8 mr-3' src={dockerIcon} alt="docker icon" />
             <img className='w-8 h-8' src={rabbitmqIcon} alt="rabbitmq icon" />
           </>} code={""} visit={""} toRight={false} />
-        <div>12</div>
+        <div></div>
 
         <TimelineIcon text='ADUS / IPVU' />
         <ExperienceDetails
@@ -73,15 +77,14 @@ export default function ExperienciaBody() {
             <img className='w-8 h-8 mr-3' src={bootstrapIcon} alt="bootstrap de react" />
             <img className='w-8 h-8' src={jqueryIcon} alt="jquery icon" />
           </>} code={""} visit={""} toRight={false} />
-        <div>18</div>
+        <div></div>
       </div>
 
       {/* PROJECTS TIMELINE */}
+      <div className="grid mb-36 mt-36 custom-grid-template-cols-right grid-cols-3">
 
-      <div className="grid mt-16 custom-grid-template-cols-right grid-cols-3">
-
-        <div className="flex flex-col justify-center items-center col-start-1 col-end-4 text-xl mb-36">
-          Projectos Personales!
+        <div className="flex flex-col justify-end items-end col-start-1 col-end-4 text-4xl mb-20 2xl:mr-20 xl:mr-16 md:mr-4 sm:mr-0">
+          <div className='2xl:w-1/4 xl:w-1/3 sm:w-1/2 text-right'>Projectos Personales!</div>
         </div>
 
         <div className='col-start-1 col-end-3'></div>
@@ -89,7 +92,11 @@ export default function ExperienciaBody() {
           <div className="top-dotted-line h-16"></div>
         </div>
 
-        <div>6</div>
+        <ExperienceSlider>
+          <img className="rounded-xl h-40" src={portfolioSketch} alt="portfolio sketch" />
+          <img className="rounded-xl h-40" src={portfolioProcess1} alt="portfolio process 1" />
+          <img className="rounded-xl h-40" src={portfolioProcess2} alt="portfolio process 2" />
+        </ExperienceSlider>
         <ExperienceDetails
           toRight={true}
           detail={<>
@@ -98,7 +105,9 @@ export default function ExperienciaBody() {
           </>} imgs={undefined} code={"https://github.com/SaniLubary/portfolio"} visit={""} />
         <TimelineIcon text='Este Portfolio!' />
 
-        <div>12</div>
+        <ExperienceSlider>
+          <img className="rounded-xl h-40" src={typesu} alt="typesu image" />
+        </ExperienceSlider>
         <ExperienceDetails
           toRight={true}
           detail={<>
@@ -106,11 +115,13 @@ export default function ExperienciaBody() {
           </>} imgs={undefined} code={"https://github.com/SaniLubary/TypeSu"} visit={"https://typesu.vercel.app/"} />
         <TimelineIcon text='Typesu!' />
 
-        <div>18</div>
+        <div></div>
         <ExperienceDetails
           toRight={true}
           detail={<>
             Componente de react para crear templates de mensajes a partir de un CSV.
+            <br />
+            <div className="text-sm mt-5">En proceso de subir y documentar mini proyecto</div>
           </>} imgs={undefined} code={""} visit={""} />
         <TimelineIcon text='CSV To Template' />
 
