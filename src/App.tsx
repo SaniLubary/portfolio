@@ -1,10 +1,11 @@
-import Navbar from "./pages/Navbar"
+import Navbar from "./components/Navbar"
 import './app.scss'
 import Menus from "./components/enums"
 import { useState } from "react"
 import MainBody from "./pages/MainBody"
 import ExperienciaBody from "./pages/ExperienciaBody"
 import SobreMiBody from "./pages/SobreMiBody"
+import ContactBody from "./pages/ContactBody" 
 
 function App() {
   const [view, setView] = useState({current: Menus.Main, waitingAnimation: ''})
@@ -31,7 +32,7 @@ function RenderBody({ menu }: { menu: string }) {
   } else if (menu === Menus.SobreMi) {
     return <SobreMiBody />
   } else if (menu === Menus.Conectemos) {
-    return <></>
+    return <ContactBody />
   } else return <></>
 }
 
