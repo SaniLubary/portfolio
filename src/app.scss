@@ -1,11 +1,16 @@
 html {
-  background-color: #232932;
   color: rgb(239,239,239);
   overflow-x: hidden;
+
+  background: linear-gradient(147.58deg, #232932 22.47%, #263645 66.21%, #105A5E 104.48%);
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.body {
-  padding-top: 20vh;
+.content {  
+  @media (max-width: 575.98px) {
+    padding: 0 4.8rem;
+  }
   @media (max-height: 700px) {
     padding-top: 12vh;
   }
@@ -15,102 +20,16 @@ span.highlight {
   color: #00ADB5;
 }
 
-.download-resume-box {  
-  margin-top: 15px;
-  padding: 0.5em 1.80em;
-  letter-spacing: '0px';
-
-  border: 3px solid #00ADB5;
-  box-sizing: border-box;
-  border-radius: 43px;
-  
-  font-family: 700 16px/1.2 "Poppins";
-  font-weight: bold;
-  line-height: 31px;
-
-  color: #00ADB5;
-
-  @media (max-width: 991.98px) {
-    font-size: 1.2rem;
-  }
-  @media (max-width: 767.98px) {
-    font-size: 1rem;
-  }
-}
-
-.left-title {
-  font: 44px/1.2 "Brawler", Helvetica, Arial, serif;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 71px;
-
-  letter-spacing: 0px;
-  color: #EEEEEE;
-}
-
-.greetings {
-  font-size: 0.65em;
-  line-height: 1.2;
-
-  @media (max-width: 991.98px) {
-    font-size: 35px;
-  }
-  @media (max-width: 767.98px) {
-    font-size: 31px;
-  }
-}
-
-.presentation {
-  text-align: left;
-
-  @media (max-width: 1199.98px) {
-    font-size: 51px;
-  }
-  @media (max-width: 991.98px) {
-    font-size: 49px;
-  }
-  @media (max-width: 767.98px) {
-    font-size: 45px;
-  }
-  @media (max-width: 575.98px) {
-    font-size: 44px;
-  }
-}
-
 @keyframes appearFromTransparent {
   0% {
     opacity: 0%;
   }
 }
 
-.show {
+.animate--appear {
   animation: 1s ease-out 0s 1 appearFromTransparent;
 }
 
-@keyframes disappearLeft {
-  50% {
-    opacity: 0%;
-  }
-  100% {
-    transform: translateX(-800px);
-    opacity: 0%;
-  }
-}
-
-@keyframes disappearRight {
-  50% {
-    opacity: 0%;
-  }
-  100% {
-    transform: translateX(800px);
-    opacity: 0%;
-  }
-}
-
-.removeRight {
-  animation: 0.8s ease-out 0s 1 disappearRight;
-}
-
-.removeLeft {
-  animation: 0.8s ease-out 0s 1 disappearLeft;
+.poppins {
+  font-family: "Poppins", Helvetica, Arial, serif;
 }

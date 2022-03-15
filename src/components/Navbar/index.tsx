@@ -1,61 +1,88 @@
 import { useEffect, useRef, useState } from "react";
-import { Disclosure, Menu } from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
+import gsap from 'gsap'
 import './styles.scss'
 import Menus from "../enums";
+import ScrollTrigger from "gsap/ScrollTrigger";
 
 export default function Navbar(props: any) {
-  const [focusView, setFocusView] = useState(Menus.Main)
-  const previousView = useRef(focusView)
+  const navigation = [Menus.SobreMi, Menus.Experiencia, Menus.Conectemos];
   
+  const [focusView, setFocusView] = useState(Menus.Main)
+  
+  const previousView = useRef(focusView)
+  const navBar = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     previousView.current = focusView
   }, [focusView])
   
-  const navigation = [Menus.SobreMi, Menus.Experiencia, Menus.Conectemos];
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+    gsap.timeline()
+      .to(navBar.current, {
+        scrollTrigger: {
+          markers: true,
+          trigger: "body",
+          start: "center 50%",
+          end: "60% 50%",
+          scrub: true,
+        },
+        backgroundColor: 'rgba(0, 0, 0, 0.228)',
+        ease: 'power3.in', 
+      })
+  }, [])
   
   /**
-   * View state will change after focusView, with a timeOut
-   *  as to give time for animations to finish
-   * @param menu Clicked menu name
+   * Changes the current view & animates elements dissapearing
+   * @param menu The menu to show on nav__button click
    */
   const showMenu = (menu: string) => {    
     const menu_ = props.view.current === menu ? Menus.Main : menu
     
     setFocusView(menu_)
-    setTimeout(() => {
-      props.setView({current: menu_, waitingAnimation: ''})
-    }, 300);
     
-    props.setView({current: menu_, waitingAnimation: previousView.current})
+    const dissapearLeftElems = Array.from(document.getElementsByClassName("dissapearLeft"))
+    const dissapearRightElems = Array.from(document.getElementsByClassName("dissapearRight"))
+    const dissapearCenterElems = Array.from(document.getElementsByClassName("dissapearCenter"))
 
-    
-    const bodyChildrens = (document.getElementById("body-container") as HTMLDivElement)?.children[0] ? 
-      Array.from((document.getElementById("body-container") as HTMLDivElement)?.children[0]?.children) as HTMLDivElement[] 
-      : []
-
-    if (bodyChildrens) {
-      while (bodyChildrens.length) {
-        const shifted = bodyChildrens.shift()
-        const popped = bodyChildrens.pop()
-
-        shifted && shifted.classList.add('removeLeft')
-        popped && popped.classList.add('removeRight')
-      }
-    } else props.view.current !== menu_ && props.setView({current: menu_, waitingAnimation: previousView.current})
+    gsap.timeline()
+      .to(dissapearLeftElems, 
+        {
+          xPercent: -800, 
+          duration: 0.4,
+          opacity: 0,
+          ease: 'power3.in', 
+        })
+      .to(dissapearRightElems, 
+        {
+          xPercent: 800, 
+          duration: 0.4,
+          opacity: 0,
+          ease: 'power3.in',
+        }, "<")
+      .to(dissapearCenterElems,
+        {
+          opacity: 0,
+          top: '700px',
+          duration: 0.3,
+          ease: 'power3.in',
+        }, "<")
+      .eventCallback('onComplete', () => props.setView({current: menu_, waitingAnimation: ''}))
   }
   
   return (
     <>
-      <div className="w-full">
-        <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:justify-between">
+      <div ref={navBar} className="bg-black bg-opacity-0 backdrop-filter backdrop-blur-sm fixed w-full top-0 px-10 z-40">
+        <nav className="flex justify-between p-8 mx-auto lg:justify-between xl:justify-between">
           {/* Logo  */}
           <Disclosure>
             {({ open }) => (
               <>
-                <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
+                <div className="flex lg:flex-wrap w-full lg:w-auto">
                   <div>
                     <a onClick={() => props.view.current !== Menus.Main && showMenu(Menus.Main)} className="cursor-pointer">
-                      <div className="mainTitle">Santi Lubary</div>
+                      <div className="logo">Santi Lubary</div>
                     </a>
                   </div>
 
@@ -104,7 +131,7 @@ export default function Navbar(props: any) {
               {navigation.map((menu, index) => (
                 <li className="mr-3 nav__item" key={index}>
                   <div>
-                    <a onClick={() => showMenu(menu)} className={`nav-option cursor-pointer flex items-center justify-center text-center px-4 py-2 ${focusView === menu && 'nav-focused'}`}>
+                    <a onClick={() => showMenu(menu)} className={`nav__option px-4 py-2 ${focusView === menu && 'nav__option--focused'}`}>
                       {menu}
                     </a>
                   </div>

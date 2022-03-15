@@ -1,8 +1,8 @@
 import React from 'react'
 
-export default function TimelineIcon({text} : {text: string}) {
+export default function TimelineIcon({text, rightSide = false} : {text: string, rightSide: boolean}) {
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className={`${!rightSide? 'dissapearLeft':'dissapearRight'} poppins flex flex-col justify-center items-center`}>
       <div>
         <div className="workplace-icono h-24 w-24 flex items-center justify-center text-center">{text}</div>
       </div>

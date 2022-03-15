@@ -2,20 +2,24 @@
   "name": "portfolio",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3001",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
+    "@react-three/drei": "^8.6.0",
+    "@react-three/fiber": "^7.0.25",
     "gsap": "^3.9.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "three": "^0.136.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
+    "@types/three": "^0.136.1",
     "@vitejs/plugin-react": "^1.0.7",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.5",

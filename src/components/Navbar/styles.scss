@@ -1,17 +1,15 @@
-.mainTitle {
+.logo {
   color: rgb(239,239,239);
   font: 48px/1.2 "Atomic Age", Helvetica, Arial, serif;
   letter-spacing: '0px';
 }
-.mainTitle, .nav-option {
-  user-select: none; /* standard syntax */
-  -webkit-user-select: none; /* webkit (safari, chrome) browsers */
-  -moz-user-select: none; /* mozilla browsers */
-  -khtml-user-select: none; /* webkit (konqueror) browsers */
-  -ms-user-select: none; /* IE10+ */  
+
+.logo, .nav__option {
+  user-select: none;
 }
-.nav-option {
-  font: 28px/1.2 "Brawler", Helvetica, Arial, serif;
+
+.nav__option {
+  font: 28px/1.2 "Poppins", Helvetica, Arial, serif;
   color: rgb(192,192,192);
   
   @media (max-width: 767.98px) {
@@ -20,10 +18,14 @@
     font-size: 24px;
     text-align: center
   }
-}
-.nav-option:hover {
-  color: rgb(4, 158, 167);
-}
-.nav-focused {
-  color: rgb(0,174,182);
+
+  &--focused {
+    color: rgb(0,174,182);
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: rgb(4, 158, 167);
+  }
+  
 }

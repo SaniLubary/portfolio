@@ -2,21 +2,21 @@ import Navbar from "./components/Navbar"
 import './app.scss'
 import Menus from "./components/enums"
 import { useState } from "react"
-import MainBody from "./pages/MainBody"
-import ExperienciaBody from "./pages/ExperienciaBody"
-import SobreMiBody from "./pages/SobreMiBody"
-import ContactBody from "./pages/ContactBody" 
+import Main from "./pages/Main"
+import Experience from "./pages/Experience"
+import About from "./pages/About"
+import Contact from "./pages/Contact" 
 
 function App() {
   const [view, setView] = useState({current: Menus.Main, waitingAnimation: ''})
 
   return (
-    <div className="w-full p-10">
+    <div className="w-screen">
       {/* Header */}
       <Navbar setView={setView} view={view} />
 
       {/* Body */}
-      <div id="body-container">
+      <div className="content">
         {view.waitingAnimation !== '' ? <RenderBody menu={view.waitingAnimation}/>:<RenderBody menu={view.current} />}
       </div>
 
@@ -26,13 +26,13 @@ function App() {
 
 function RenderBody({ menu }: { menu: string }) {
   if (menu === Menus.Main) {
-    return <MainBody />
+    return <Main />
   } else if (menu === Menus.Experiencia) {
-    return <ExperienciaBody />
+    return <Experience />
   } else if (menu === Menus.SobreMi) {
-    return <SobreMiBody />
+    return <About />
   } else if (menu === Menus.Conectemos) {
-    return <ContactBody />
+    return <Contact />
   } else return <></>
 }
 

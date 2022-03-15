@@ -3,7 +3,7 @@ import React from 'react'
 interface IReferenceButtons {
   code: string,
   visit: string,
-  toRight: boolean
+  rightSide: boolean
 }
 
 interface IExperienceDetails extends IReferenceButtons{
@@ -11,25 +11,25 @@ interface IExperienceDetails extends IReferenceButtons{
   imgs: any,
 }
 
-export default function ExperienceDetails({detail, imgs, code = '', visit = '', toRight = false} : IExperienceDetails) {
+export default function ExperienceDetails({detail, imgs, code = '', visit = '', rightSide = false} : IExperienceDetails) {
   return (
-    <div className='flex flex-col'>
-      <div className={`w-8/12 ${toRight && 'ml-auto text-right'}`}>
+    <div className={`${!rightSide? 'dissapearLeft':'dissapearRight'} flex flex-col`}>
+      <div className={`w-8/12 ${rightSide && 'ml-auto text-right'}`}>
         {detail}
       </div>
       <div className='flex flex-row mt-3'>
         {imgs}
       </div>
       
-      {(code || visit) && <ReferenceButtons toRight={toRight} code={code} visit={visit}  />}
+      {(code || visit) && <ReferenceButtons rightSide={rightSide} code={code} visit={visit}  />}
       
     </div>
   )
 }
 
-function ReferenceButtons({toRight = false, code, visit}: IReferenceButtons) {
+function ReferenceButtons({rightSide = false, code, visit}: IReferenceButtons) {
   return (
-    <div className={`mt-3 ${toRight && 'ml-auto text-right'}`}>
+    <div className={`mt-3 ${rightSide && 'ml-auto text-right'}`}>
       {code !== '' && 
         <a target="_blank" href={code} className='reference-buttons'>
           {'<'}Code {'/>'}

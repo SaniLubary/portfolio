@@ -1,0 +1,88 @@
+.workplace-icono {
+  min-width: 100px;
+  min-height: 100px;
+  
+  border: 5px solid rgb(192,192,192);
+  border-radius: 100px;
+  
+  border-top-style: dotted;
+  border-bottom-style: dotted;
+  border-left-style: groove;
+  border-right-style: ridge;
+
+  padding: 1em;
+}
+
+.top-dotted-line {
+  width: 1px;
+  
+  border-left: 5px solid #c0c0c0;
+  border-radius: 50px;
+  border-style: dotted;
+}
+
+.top-dotted-line-container {
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  min-height: 100px;
+}
+
+.bottom-line {
+  height: calc(100% - 100px); // div height minus icon height
+}
+
+.info-temporal-line {
+  border-bottom: 1px solid #00ADB5;
+  border-left: 1px solid #00ADB5;
+  margin-top: 1em;
+  padding: 3px;
+  padding-left: 10px;
+  font-size: 0.7em;
+}
+
+.info-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 0.5em;
+
+  border-radius: 100px;
+}
+
+.custom-grid-template-cols-left {
+  grid-template-columns: 20% 40% 40%;
+}
+
+.custom-grid-template-cols-right {
+  grid-template-columns: 40% 40% 20%; 
+}
+
+.reference-buttons {
+  padding: 0.3em 32px;
+
+  border: 3px solid #00ADB5;
+  box-sizing: border-box;
+  border-radius: 43px;
+  
+  font-family: 700 16px/1.2 "Poppins";
+  font-weight: bold;
+
+  color: #00ADB5;
+
+  opacity: 0.75;
+
+}
+
+.reference-buttons:hover {
+  opacity: 1;
+}
+
+.custom-arrow {
+  width: 35px;
+  height: 37px;
+
+  border: 2px solid #BFBFBF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  transform: matrix(0, 1, 1, 0, 0, 0);
+}
