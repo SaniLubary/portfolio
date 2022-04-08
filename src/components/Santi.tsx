@@ -48,7 +48,7 @@ type GLTFActions = Record<ActionName, THREE.AnimationAction>
 
 export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
-  const { nodes, materials, animations } = useGLTF('/santi.glb') as GLTFResult
+  const { nodes, materials, animations } = useGLTF('src/assets/santi.glb') as GLTFResult
 
   // @ts-ignore
   const { actions } = useAnimations<GLTFActions>(animations, group)

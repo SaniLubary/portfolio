@@ -7,16 +7,16 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 
 export default function Navbar(props: any) {
   const navigation = [Menus.SobreMi, Menus.Experiencia, Menus.Conectemos];
-  
+
   const [focusView, setFocusView] = useState(Menus.Main)
-  
+
   const previousView = useRef(focusView)
   const navBar = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     previousView.current = focusView
   }, [focusView])
-  
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
     gsap.timeline()
@@ -29,34 +29,34 @@ export default function Navbar(props: any) {
           scrub: true,
         },
         backgroundColor: 'rgba(0, 0, 0, 0.228)',
-        ease: 'power3.in', 
+        ease: 'power3.in',
       })
   }, [])
-  
+
   /**
    * Changes the current view & animates elements dissapearing
    * @param menu The menu to show on nav__button click
    */
-  const showMenu = (menu: string) => {    
+  const showMenu = (menu: string) => {
     const menu_ = props.view.current === menu ? Menus.Main : menu
-    
+
     setFocusView(menu_)
-    
+
     const dissapearLeftElems = Array.from(document.getElementsByClassName("dissapearLeft"))
     const dissapearRightElems = Array.from(document.getElementsByClassName("dissapearRight"))
     const dissapearCenterElems = Array.from(document.getElementsByClassName("dissapearCenter"))
 
     gsap.timeline()
-      .to(dissapearLeftElems, 
+      .to(dissapearLeftElems,
         {
-          xPercent: -800, 
+          xPercent: -800,
           duration: 0.4,
           opacity: 0,
-          ease: 'power3.in', 
+          ease: 'power3.in',
         })
-      .to(dissapearRightElems, 
+      .to(dissapearRightElems,
         {
-          xPercent: 800, 
+          xPercent: 800,
           duration: 0.4,
           opacity: 0,
           ease: 'power3.in',
@@ -68,13 +68,13 @@ export default function Navbar(props: any) {
           duration: 0.3,
           ease: 'power3.in',
         }, "<")
-      .eventCallback('onComplete', () => props.setView({current: menu_, waitingAnimation: ''}))
+      .eventCallback('onComplete', () => props.setView({ current: menu_, waitingAnimation: '' }))
   }
-  
+
   return (
     <>
-      <div ref={navBar} className="bg-black bg-opacity-0 backdrop-filter backdrop-blur-sm fixed w-full top-0 px-10 z-40">
-        <nav className="flex justify-between p-8 mx-auto lg:justify-between xl:justify-between">
+      <div ref={navBar} className="bg-black bg-opacity-0 backdrop-filter backdrop-blur-sm fixed w-full z-40">
+        <nav className="flex justify-between px-16 py-8">
           {/* Logo  */}
           <Disclosure>
             {({ open }) => (

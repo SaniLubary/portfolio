@@ -5,22 +5,19 @@ import { useState } from "react"
 import Main from "./pages/Main"
 import Experience from "./pages/Experience"
 import About from "./pages/About"
-import Contact from "./pages/Contact" 
+import Contact from "./pages/Contact"
 
 function App() {
-  const [view, setView] = useState({current: Menus.Main, waitingAnimation: ''})
+  const [view, setView] = useState({ current: Menus.Main, waitingAnimation: '' })
 
   return (
-    <div className="w-screen">
+    <>
       {/* Header */}
       <Navbar setView={setView} view={view} />
 
       {/* Body */}
-      <div className="content">
-        {view.waitingAnimation !== '' ? <RenderBody menu={view.waitingAnimation}/>:<RenderBody menu={view.current} />}
-      </div>
-
-    </div>
+      {view.waitingAnimation !== '' ? <RenderBody menu={view.waitingAnimation} /> : <RenderBody menu={view.current} />}
+    </>
   )
 }
 
