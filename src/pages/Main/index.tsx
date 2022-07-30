@@ -1,7 +1,9 @@
+import { OrbitControls } from '@react-three/drei'
 import { Canvas, Euler, Vector3 } from '@react-three/fiber'
 import { Suspense, useEffect } from 'react'
 import Model from '../../components/Santi'
-import { Description, DescriptionText, DescriptionButton, ModelContainer, Body } from '../../styles/styles'
+import { Description, DescriptionText, DescriptionButton, ModelContainer } from './styles'
+import { Body } from '../../Styles/Styles'
 
 // 3D Model values
 const position: Vector3 = [2.5, 0, 0]
@@ -37,7 +39,9 @@ export default function Main() {
       <ModelContainer className="dissapearRight">
         <Suspense fallback={null}>
           <Canvas className='animate--appear'>
-            <directionalLight intensity={1} />
+            {/* <hemisphereLight /> */}
+            <OrbitControls />
+            <directionalLight position={[5, 1, 10]} intensity={1} />
             <Model position={position} rotation={rotation} scale={scale} />
           </Canvas>
         </Suspense>

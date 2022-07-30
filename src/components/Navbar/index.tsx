@@ -75,7 +75,7 @@ export default function Navbar(props: any) {
     <>
       <div ref={navBar} className="bg-black bg-opacity-0 backdrop-filter backdrop-blur-sm fixed w-full z-40">
         <nav className="flex justify-between px-16 py-8">
-          {/* Logo  */}
+          {/* Logo */}
           <Disclosure>
             {({ open }) => (
               <>
@@ -88,9 +88,9 @@ export default function Navbar(props: any) {
 
                   <Disclosure.Button
                     aria-label="Toggle Menu"
-                    className="px-2 py-1 ml-auto lg:hidden focus:outline-none dark:text-gray-300">
+                    className="px-2 py-1 ml-auto lg:hidden focus:outline-none">
                     <svg
-                      className="w-6 h-6 fill-current"
+                      className="w-6 h-6 fill-white"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24">
                       {open && (
@@ -113,7 +113,7 @@ export default function Navbar(props: any) {
                     <>
                       {navigation.map((menu, index) => (
                         <div key={index}>
-                          <a onClick={() => showMenu(menu)} className={`nav-option cursor-pointer flex items-center justify-center text-center px-4 py-2 ${focusView === menu && 'nav-focused'}`}>
+                          <a onClick={() => showMenu(menu)} className={`nav__option text-white cursor-pointer flex items-center justify-center text-center px-4 py-2 ${focusView === menu && 'nav__option--focused'}`}>
                             {menu}
                           </a>
                         </div>
@@ -131,7 +131,7 @@ export default function Navbar(props: any) {
               {navigation.map((menu, index) => (
                 <li className="mr-3 nav__item" key={index}>
                   <div>
-                    <a onClick={() => showMenu(menu)} className={`nav__option px-4 py-2 ${focusView === menu && 'nav__option--focused'}`}>
+                    <a onClick={() => showMenu(menu)} className={`text-white nav__option px-4 py-2 ${focusView === menu && 'nav__option--focused'}`}>
                       {menu}
                     </a>
                   </div>

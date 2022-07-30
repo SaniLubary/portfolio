@@ -22,6 +22,13 @@ function App() {
 }
 
 function RenderBody({ menu }: { menu: string }) {
+  {/* Css to fix height on main view */}
+  if (menu === Menus.Main) {
+    document.getElementById('root')?.classList.add('fullHeight')
+  } else {
+    document.getElementById('root')?.classList.remove('fullHeight')
+  }
+  
   if (menu === Menus.Main) {
     return <Main />
   } else if (menu === Menus.Experiencia) {
