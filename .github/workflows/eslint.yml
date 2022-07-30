@@ -10,7 +10,6 @@
 name: ESLint
 
 on:
-  push:
   pull_request:
   schedule:
     - cron: "0 0 * * 0"
@@ -33,7 +32,7 @@ jobs:
           npm install @microsoft/eslint-formatter-sarif@2.1.7
 
       - name: Run ESLint
-        run: npx eslint .
+        run: npx eslint src
           --config .eslintrc.json
           --ext .js,.jsx,.ts,.tsx
           --format @microsoft/eslint-formatter-sarif
@@ -43,6 +42,5 @@ jobs:
       - name: Upload analysis results to GitHub
         uses: github/codeql-action/upload-sarif@v2
         with:
-          external-repository-token: ${{ secrets.EXTERNAL_REPOSITORY_TOKEN }}
           sarif_file: eslint-results.sarif
           wait-for-processing: true
