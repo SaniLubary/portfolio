@@ -40,7 +40,6 @@ type GLTFResult = GLTF & {
   };
 };
 
-// eslint-disable-next-line no-undef
 export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
   const group = useRef<THREE.Group>();
   const { nodes, materials } = useGLTF("src/assets/santi2.glb") as GLTFResult;
