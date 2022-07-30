@@ -1,10 +1,10 @@
 module.exports = {
   content: [
-    "./src/**/*.{html,js,ts,jsx,tsx}",
-    "./index.html"
+    './src/**/*.{html,js,ts,jsx,tsx}',
+    './index.html'
   ],
   theme: {
-    extend: {},
+    extend: {}
   },
   plugins: [
     ({ addComponents }) => {
@@ -25,5 +25,5 @@ module.exports = {
       }
       addComponents(AppLogo)
     }
-  ],
+  ]
 }

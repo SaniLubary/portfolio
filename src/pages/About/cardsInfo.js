@@ -11,16 +11,16 @@ const art = {
   images: [
     {
       path: MandarinaGirl,
-      selected: true,
+      selected: true
     },
     {
       path: BlondGirl,
-      selected: false,
+      selected: false
     },
     {
       path: Kid,
-      selected: false,
-    },
+      selected: false
+    }
   ],
   title: 'Art',
   details: 'I like art'
@@ -30,20 +30,20 @@ const catos = {
   images: [
     {
       path: wishyPiso,
-      selected: true,
+      selected: true
     },
     {
       path: wishyBalcon,
-      selected: false,
+      selected: false
     },
     {
       path: mesh,
-      selected: false,
+      selected: false
     },
     {
       path: wishyMaria,
-      selected: false,
-    },
+      selected: false
+    }
   ],
   title: 'Art',
   details: 'I like art'
@@ -53,8 +53,8 @@ const music = {
   images: [
     {
       path: Music,
-      selected: true,
-    },
+      selected: true
+    }
   ],
   title: 'Art',
   details: 'I like art'
