@@ -38,7 +38,7 @@ export default function About() {
         />
         <div className="hobbies__content">
           <h1 className="hobbies__title">
-            En mis timepos libres tambien <span className="highlight">amo</span>
+            En mis timepos libres tambien <span className="highlight-redish">amo</span>
           </h1>
 
           <div className="hobbies__cards">

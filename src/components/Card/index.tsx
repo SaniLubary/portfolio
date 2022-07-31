@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import gsap from "gsap";
 
 interface Icard {
   cardInfoInit: {
@@ -17,24 +18,37 @@ const Card = ({ cardInfoInit }: Icard) => {
   const refImage = useRef<HTMLImageElement | null>(null);
 
   const handleButtonClick = (img: Icard["cardInfoInit"]["images"][0]) => {
-    if (!img.selected) {
-      img.selected = true;
+    if (img.selected) return
+    
+    img.selected = true
 
-      if (refImage?.current?.src) refImage.current.src = img.path;
-
-      setCardInfo({
-        images: cardInfo.images.map((oldImg) =>
-          oldImg.path === img.path
-            ? { path: img.path, selected: true }
-            : { path: oldImg.path, selected: false }
-        ),
-        title: cardInfo.title,
-        details: cardInfo.details,
-      });
+    if (refImage?.current?.src) {
+      refImage.current.src = img.path;
+      fadeOutAnimation(refImage.current)
     }
+
+    setCardInfo({
+      images: cardInfo.images.map((oldImg) =>
+        oldImg.path === img.path
+          ? { path: img.path, selected: true }
+          : { path: oldImg.path, selected: false }
+      ),
+      title: cardInfo.title,
+      details: cardInfo.details,
+    });
   };
 
+  function fadeOutAnimation(elem: HTMLElement) {
+    gsap.to(elem, {
+      opacity: "100%",
+      duration: 0.5,
+      ease: "power3.inOut",
+    })
+  }
+
   const updateToNextCardImage = () => {
+    if (cardInfo.images.length === 1) return
+    
     const images = cardInfo.images;
 
     for (let i = 0; i < images.length; i++) {
@@ -72,6 +86,7 @@ const Card = ({ cardInfoInit }: Icard) => {
     images.forEach((img) => {
       if (img.selected === true && refImage.current) {
         refImage.current.src = img.path;
+        fadeOutAnimation(refImage.current)
       }
     });
 
