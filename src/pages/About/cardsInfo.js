@@ -23,7 +23,7 @@ const art = {
     }
   ],
   title: 'Art',
-  details: 'I like art'
+  details: 'Relaxing hobbie by which I found a lot of awesome people'
 }
 
 const catos = {
@@ -45,8 +45,8 @@ const catos = {
       selected: false
     }
   ],
-  title: 'Art',
-  details: 'I like art'
+  title: 'Catos',
+  details: 'Cats cat, kitty kitten cat woah dude, cats. Not much to explain here'
 }
 
 const music = {
@@ -56,8 +56,8 @@ const music = {
       selected: true
     }
   ],
-  title: 'Art',
-  details: 'I like art'
+  title: 'Music',
+  details: 'It was always a very important part in my life, I play some instruments and used to compose a little'
 }
 
 export { catos, art, music }

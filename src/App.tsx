@@ -1,14 +1,22 @@
 import { useState } from "react";
+
 import Navbar from "./components/Navbar";
-import "./app.scss";
 import Menus from "./components/enums";
+
+import "./app.scss";
+
 import Main from "./pages/Main";
 import Experience from "./pages/Experience";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 
+export interface View {
+  current: string;
+  waitingAnimation: string;
+}
+
 function App() {
-  const [view, setView] = useState({
+  const [view, setView] = useState<View>({
     current: Menus.Main,
     waitingAnimation: "",
   });

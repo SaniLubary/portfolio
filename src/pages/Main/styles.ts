@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Description = styled.h1`
+export const Description = styled.section`
   font: 44px/1.2 "Poppins", Helvetica, Arial, serif;
   font-style: normal;
   font-weight: normal;
@@ -31,12 +31,10 @@ export const DescriptionButton = styled.button`
   color: #00ADB5;
 `
 
-export const ModelContainer = styled.div`
+export const MainModelContainer = styled.div`
   position: fixed;
   height: 100%;
   width: 100%;
-  border: 3px solid red;
-
   
   top: 0px;
   left: 0px;

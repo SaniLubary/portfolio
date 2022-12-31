@@ -1,31 +1,53 @@
-import { useRef, useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import styled from "styled-components";
 
-interface Icard {
+const SeparatorLine = styled.div`
+  width: 80%;
+  height: 4px;
+  margin: 6px auto;
+  background-color: #263645;
+  align-self: flex-start;
+`
+
+interface CardProps {
   cardInfoInit: {
     images: {
       path: string;
       selected: boolean;
+      alt?: string;
     }[];
     title: string;
     details: string;
   };
 }
 
-const Card = ({ cardInfoInit }: Icard) => {
+const floatAnimation = (ref: MutableRefObject<any>) => {
+  const tl = gsap.timeline()
+  tl.repeat(-1)
+  tl.yoyo(true)
+  tl.to(ref.current, { duration: 5, scale: 1.5, y: '+=4', x: '+=3', rotation: '-=2', ease: "power1.ease" })
+}
+
+const Card = ({ cardInfoInit }: CardProps) => {
   const [cardInfo, setCardInfo] = useState(cardInfoInit);
 
+
   const refImage = useRef<HTMLImageElement | null>(null);
-
-  const handleButtonClick = (img: Icard["cardInfoInit"]["images"][0]) => {
-    if (img.selected) return
-    
-    img.selected = true
-
-    if (refImage?.current?.src) {
-      refImage.current.src = img.path;
-      fadeOutAnimation(refImage.current)
+  useEffect(() => {
+    centerCardImage()
+    if (refImage.current) {
+      floatAnimation(refImage)
     }
+  })
+
+  const handleButtonClick = (img: CardProps["cardInfoInit"]["images"][0]) => {
+    if (img.selected || !refImage?.current) return
+
+    img.selected = true
+    refImage.current.src = img.path;
+    fadeOutCardImage(refImage.current)
+    centerCardImage()
 
     setCardInfo({
       images: cardInfo.images.map((oldImg) =>
@@ -36,9 +58,9 @@ const Card = ({ cardInfoInit }: Icard) => {
       title: cardInfo.title,
       details: cardInfo.details,
     });
-  };
+  }
 
-  function fadeOutAnimation(elem: HTMLElement) {
+  function fadeOutCardImage(elem: HTMLElement) {
     gsap.to(elem, {
       opacity: "100%",
       duration: 0.5,
@@ -46,11 +68,24 @@ const Card = ({ cardInfoInit }: Icard) => {
     })
   }
 
-  const updateToNextCardImage = () => {
+  function centerCardImage() {
+    if (!refImage.current) return
+
+    const imgWidth = refImage.current.width
+
+    if (refImage.current.height < 180) {
+      refImage.current.style.top = '-175px'
+    } else {
+      refImage.current.style.top = `-${imgWidth / 1.5}px`
+    }
+  }
+
+  const handleImageClick = () => {
     if (cardInfo.images.length === 1) return
-    
+
     const images = cardInfo.images;
 
+    // Logic to loop over images on click
     for (let i = 0; i < images.length; i++) {
       // Current is false? do nothing
       if (images[i].selected === false) continue;
@@ -83,10 +118,12 @@ const Card = ({ cardInfoInit }: Icard) => {
       }
     }
 
+    // Update img properties 
     images.forEach((img) => {
       if (img.selected === true && refImage.current) {
         refImage.current.src = img.path;
-        fadeOutAnimation(refImage.current)
+        centerCardImage()
+        fadeOutCardImage(refImage.current)
       }
     });
 
@@ -95,21 +132,21 @@ const Card = ({ cardInfoInit }: Icard) => {
       title: cardInfo.title,
       details: cardInfo.details,
     });
-  };
+  }
 
   return (
     <div className="hobbies__cards__card overflow-hidden text-white">
       {/* Image */}
       <div
-        onClick={() => updateToNextCardImage()}
+        onClick={() => handleImageClick()}
         className="hobbies__cards__card__img h-2/5 overflow-hidden"
       >
         <div className="innerShadow z-10 w-full h-full relative"></div>
         <img
           ref={refImage}
-          className="relative -top-56"
+          className="relative m-auto w-full scale-150"
           src={cardInfoInit.images[0].path}
-          alt="Mountains"
+          alt={cardInfoInit.images[0].alt ? cardInfoInit.images[0].alt : 'Imagen sin descripcion'}
         />
       </div>
 
@@ -119,20 +156,30 @@ const Card = ({ cardInfoInit }: Icard) => {
           let selected = img.selected ? "selected" : "not-selected";
           return (
             <div
-              key={img.path + i + selected}
+              key={img.path + i}
               onClick={() => handleButtonClick(img)}
-              className={`hobbies__cards__card__selection__${selected}`}
+              className={`transition-all hobbies__cards__card__selection__${selected}`}
             ></div>
           );
         })}
       </div>
 
+      <SeparatorLine />
+
       {/* Card Body */}
-      <div className="hobbies__cards__card__body">
-        <div className="hobbies__cards__card__body__title">Art</div>
+      <section className="hobbies__cards__card__body">
+        <h1 className="hobbies__cards__card__body__title">{cardInfo.title}</h1>
+        <p>{cardInfo.details}</p>
+      </section>
+
+      <div className="mt-auto mb-2">
+        <SeparatorLine />
+        <div className="flex justify-center">
+          <div>abc</div>
+        </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default Card;

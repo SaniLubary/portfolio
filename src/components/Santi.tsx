@@ -40,7 +40,11 @@ type GLTFResult = GLTF & {
   };
 };
 
-export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
+type ModelType = JSX.IntrinsicElements["group"] & {
+  laptop?: boolean
+}
+
+export default function Model({ ...props }: ModelType) {
   const group = useRef<THREE.Group>();
   const { nodes, materials } = useGLTF("src/assets/santi2.glb") as GLTFResult;
 
@@ -55,30 +59,34 @@ export default function Model({ ...props }: JSX.IntrinsicElements["group"]) {
           userData={{ name: "Armature.003" }}
         >
           <primitive object={nodes.Bone} />
-          <group
-            name="Lowpoly_Notebook001"
-            userData={{ name: "Lowpoly_Notebook.001" }}
-          >
-            <skinnedMesh
-              name="Cube009"
-              geometry={nodes.Cube009.geometry}
-              material={materials["Lowpoly_Body.001"]}
-              skeleton={nodes.Cube009.skeleton}
-            />
-            <skinnedMesh
-              name="Cube009_1"
-              geometry={nodes.Cube009_1.geometry}
-              material={materials["Lowpoly_Screen.001"]}
-              skeleton={nodes.Cube009_1.skeleton}
-            />
-          </group>
-          <skinnedMesh
-            name="pantalla"
-            geometry={nodes.pantalla.geometry}
-            material={materials["brillo azul.001"]}
-            skeleton={nodes.pantalla.skeleton}
-            userData={{ name: "pantalla" }}
-          />
+          {props?.laptop &&
+            <>
+              <group
+                name="Lowpoly_Notebook001"
+                userData={{ name: "Lowpoly_Notebook.001" }}
+              >
+                <skinnedMesh
+                  name="Cube009"
+                  geometry={nodes.Cube009.geometry}
+                  material={materials["Lowpoly_Body.001"]}
+                  skeleton={nodes.Cube009.skeleton}
+                />
+                <skinnedMesh
+                  name="Cube009_1"
+                  geometry={nodes.Cube009_1.geometry}
+                  material={materials["Lowpoly_Screen.001"]}
+                  skeleton={nodes.Cube009_1.skeleton}
+                />
+              </group>
+              <skinnedMesh
+                name="pantalla"
+                geometry={nodes.pantalla.geometry}
+                material={materials["brillo azul.001"]}
+                skeleton={nodes.pantalla.skeleton}
+                userData={{ name: "pantalla" }}
+              />
+            </>
+          }
         </group>
         <group
           name="personaje"

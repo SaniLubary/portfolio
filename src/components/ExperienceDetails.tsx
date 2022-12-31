@@ -1,10 +1,10 @@
-interface IReferenceButtons {
+interface ReferenceButtonsProps {
   code: string;
   visit: string;
   rightSide: boolean;
 }
 
-interface IExperienceDetails extends IReferenceButtons {
+interface ExperienceDetailsProps extends ReferenceButtonsProps {
   detail: any;
   imgs: any;
 }
@@ -15,7 +15,7 @@ export default function ExperienceDetails({
   code = "",
   visit = "",
   rightSide = false,
-}: IExperienceDetails) {
+}: ExperienceDetailsProps) {
   return (
     <div
       className={`${
@@ -38,7 +38,7 @@ function ReferenceButtons({
   rightSide = false,
   code,
   visit,
-}: IReferenceButtons) {
+}: ReferenceButtonsProps) {
   return (
     <div className={`mt-3 ${rightSide && "ml-auto text-right"}`}>
       {code !== "" && (

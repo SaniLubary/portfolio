@@ -1,11 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Disclosure } from "@headlessui/react";
 import gsap from 'gsap'
-import './styles.scss'
-import Menus from "../enums";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-export default function Navbar(props: any) {
+import { View } from "../../App"
+import Menus from "../enums";
+
+import './styles.scss'
+
+interface NavbarProps {
+  view: View,
+  setView: React.Dispatch<React.SetStateAction<View>>,
+}
+
+export default function Navbar(props: NavbarProps) {
   const navigation = [Menus.SobreMi, Menus.Experiencia, Menus.Conectemos];
 
   const [focusView, setFocusView] = useState(Menus.Main)
@@ -50,22 +58,25 @@ export default function Navbar(props: any) {
       .to(dissapearLeftElems,
         {
           xPercent: -800,
-          duration: 0.4,
+          duration: 1,
           opacity: 0,
+          stagger: 0.2,
           ease: 'power3.in',
         })
       .to(dissapearRightElems,
         {
           xPercent: 800,
-          duration: 0.4,
+          duration: 1,
           opacity: 0,
+          stagger: 0.2,
           ease: 'power3.in',
         }, "<")
       .to(dissapearCenterElems,
         {
           opacity: 0,
           top: '700px',
-          duration: 0.3,
+          duration: 0.6,
+          stagger: 0.2,
           ease: 'power3.in',
         }, "<")
       .eventCallback('onComplete', () => props.setView({ current: menu_, waitingAnimation: '' }))
@@ -77,7 +88,7 @@ export default function Navbar(props: any) {
         <nav className="flex justify-between px-16 py-8">
           {/* Logo */}
           <Disclosure>
-            {({ open }) => (
+            {({ open }: { open: boolean }) => (
               <>
                 <div className="flex lg:flex-wrap w-full lg:w-auto">
                   <div>
