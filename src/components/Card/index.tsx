@@ -19,6 +19,7 @@ interface CardProps {
     }[];
     title: string;
     details: string;
+    icons?: { path: string, icon: string }[];
   };
 }
 
@@ -31,7 +32,6 @@ const floatAnimation = (ref: MutableRefObject<any>) => {
 
 const Card = ({ cardInfoInit }: CardProps) => {
   const [cardInfo, setCardInfo] = useState(cardInfoInit);
-
 
   const refImage = useRef<HTMLImageElement | null>(null);
   useEffect(() => {
@@ -133,7 +133,7 @@ const Card = ({ cardInfoInit }: CardProps) => {
       details: cardInfo.details,
     });
   }
-
+  console.log(cardInfo.icons)
   return (
     <div className="hobbies__cards__card overflow-hidden text-white">
       {/* Image */}
@@ -164,7 +164,7 @@ const Card = ({ cardInfoInit }: CardProps) => {
         })}
       </div>
 
-      <SeparatorLine />
+      {(cardInfo?.icons && cardInfo.icons.length > 0) && <SeparatorLine />}
 
       {/* Card Body */}
       <section className="hobbies__cards__card__body">

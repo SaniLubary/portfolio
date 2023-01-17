@@ -6,6 +6,9 @@ import wishyPiso from '../../assets/hobbies/wishy-piso.png'
 import wishyBalcon from '../../assets/hobbies/wishy-balcon.jpg'
 import wishyMaria from '../../assets/hobbies/wishy-maria.jpg'
 import mesh from '../../assets/hobbies/mesh.jpg'
+import instagram from '../../assets/icons/socialMedia/instagram.png'
+import spotify from '../../assets/icons/socialMedia/spotify.png'
+import youtube from '../../assets/icons/socialMedia/youtube.png'
 
 const art = {
   images: [
@@ -23,7 +26,10 @@ const art = {
     }
   ],
   title: 'Art',
-  details: 'Relaxing hobbie by which I found a lot of awesome people'
+  details: 'Relaxing hobbie by which I found a lot of awesome people',
+  icons: [
+    { path: '', icon: instagram }
+  ]
 }
 
 const catos = {
@@ -57,7 +63,11 @@ const music = {
     }
   ],
   title: 'Music',
-  details: 'It was always a very important part in my life, I play some instruments and used to compose a little'
+  details: 'It was always a very important part in my life, I play some instruments and used to compose a little',
+  icons: [
+    { path: '', icon: youtube },
+    { path: '', icon: spotify },
+  ]
 }
 
 export { catos, art, music }

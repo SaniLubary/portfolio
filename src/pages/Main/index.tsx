@@ -29,7 +29,7 @@ export default function Main() {
           Desarrollador Web<br />
           Full - Stack
         </DescriptionText>
-        <DescriptionButton>
+        <DescriptionButton style={{ fontSize: 16 }}>
           descargar cv
         </DescriptionButton>
       </Description>
