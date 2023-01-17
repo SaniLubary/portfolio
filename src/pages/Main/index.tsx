@@ -1,9 +1,12 @@
+import { Suspense, useEffect } from 'react'
 import { OrbitControls } from '@react-three/drei'
 import { Canvas, Euler, Vector3 } from '@react-three/fiber'
-import { Suspense, useEffect } from 'react'
+
 import Model from '../../components/atoms/Santi'
-import { Description, DescriptionText, DescriptionButton, MainModelContainer } from './styles'
+import { DescriptionButton } from './styles'
+import { MainModelContainer } from "./MainModelContainer"
 import { Body } from '../../Styles/Styles'
+import { Text } from '../../components/atoms/Text'
 
 // 3D Model values
 const position: Vector3 = [2.5, 0, 0]
@@ -21,18 +24,18 @@ export default function Main() {
   return (
     <Body className='animate--appear'>
       {/* Left */}
-      <Description className='dissapearLeft'>
-        <DescriptionText>
+      <div className='dissapearLeft'>
+        <Text size='medium'>
           Hola! Soy Santi
-        </DescriptionText>
-        <DescriptionText large>
+        </Text>
+        <Text size='large'>
           Desarrollador Web<br />
           Full - Stack
-        </DescriptionText>
+        </Text>
         <DescriptionButton style={{ fontSize: 16 }}>
           descargar cv
         </DescriptionButton>
-      </Description>
+      </div>
       {/* Right */}
       <MainModelContainer className="animate--appear dissapearRight">
         <Suspense fallback={null}>

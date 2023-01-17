@@ -2,21 +2,20 @@ import { MutableRefObject, Suspense, useEffect, useRef } from "react";
 
 // Styles
 import "./styles.scss";
-import { Body, BottomSection, UnderWavesSection } from "../../Styles/Styles";
-import { Description, DescriptionText } from "../Main/styles";
+import { BottomSection, UnderWavesSection } from "../../Styles/Styles";
 import { ModelContainer } from "./styles";
+import InfoWithMountains from "../../components/templates/InfoWithMountains"
 
 // Components
 import Card from "../../components/organisms/Card";
 
 // Assets
-import MountainsSvg from "../../assets/project-images/mountains.svg";
-
 import { catos, art, music } from "./cardsInfo";
 import { Canvas, Euler, Vector3 } from "@react-three/fiber";
 import Model from "../../components/atoms/Santi";
 import gsap from "gsap";
 import { WavesSvg } from "../../components/atoms/WaveSvg";
+import { Text } from "../../components/atoms/Text";
 
 // 3D Model values
 const position: Vector3 = [-0.3, 1, 0]
@@ -50,20 +49,14 @@ export default function About() {
 
   return (
     <>
-      <Body className="animate--appear about">
-        {/* MountainsSvg */}
-        <img className="mountains dissapearCenter" src={MountainsSvg} alt="Mountains" />
-
-        {/* Left */}
+      <InfoWithMountains>
         <div className="left-desc dissapearLeft">
           <div className="left-desc__desc">
-            <Description>
-              <DescriptionText large={false}>I love</DescriptionText>
-              <DescriptionText large={true}>{`>`}</DescriptionText>
-            </Description>
+            <Text size='large'>I love</Text>
+            <Text size='large'>{`>`}</Text>
           </div>
         </div>
-      </Body>
+      </InfoWithMountains>
 
       {/* BottomSection Section */}
       <BottomSection className="dissapearCenter">

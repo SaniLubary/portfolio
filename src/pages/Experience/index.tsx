@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./styles.scss";
 
 // Assets
-import MountainsSvg from "../../assets/project-images/mountains.svg";
 import adusSvg from "../../assets/icons/workPlaces/adus.svg";
 import andesSvg from "../../assets/icons/workPlaces/andes.svg";
 import globantSvg from "../../assets/icons/workPlaces/globant.svg";
@@ -11,8 +10,9 @@ import { WavesSvg } from "../../components/atoms/WaveSvg";
 
 // Components
 import GlobantDescription from "./GlobantDescription";
-import { Description, DescriptionText } from "../Main/styles";
-import { Body, BottomSection, UnderWavesSection } from "../../Styles/Styles";
+import { BottomSection, UnderWavesSection } from "../../Styles/Styles";
+import InfoWithMountains from "../../components/templates/InfoWithMountains";
+import ExperienceTitle from "../../components/molecules/ExperienceTitle";
 
 const workPlacesLogos = [
   { src: globantSvg, alt: 'Globant logo', description: <GlobantDescription /> },
@@ -30,13 +30,9 @@ export default function Experience() {
 
   return (
     <>
-      <Body className="animate--appear about">
-        {/* MountainsSvg */}
-        <img className="dissapearCenter absolute left-24 -scale-x-100" src={MountainsSvg} alt="Mountains background" />
-
-        {/* Info on right side */}
+      <InfoWithMountains flip={true}>
         <div className="flex flex-col dissapearRight absolute right-24 justify-end">
-          <MainTitle />
+          <ExperienceTitle />
 
           <div className="flex justify-end items-center align-middle">
             {workPlacesLogos.map(work => {
@@ -48,7 +44,7 @@ export default function Experience() {
             {description && description}
           </div>
         </div>
-      </Body>
+      </InfoWithMountains>
 
       {/* BottomSection Section */}
       <BottomSection className="dissapearCenter">
@@ -65,13 +61,4 @@ export default function Experience() {
   );
 }
 
-function MainTitle() {
-  return <Description>
-    <DescriptionText className="text-right">
-      Where
-    </DescriptionText>
-    <DescriptionText className="text-right">
-      I've worked at
-    </DescriptionText>
-  </Description>;
-}
+
