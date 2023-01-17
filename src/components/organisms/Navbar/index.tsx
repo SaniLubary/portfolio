@@ -3,8 +3,8 @@ import { Disclosure } from "@headlessui/react";
 import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-import { View } from "../../App"
-import Menus from "../enums";
+import { View } from "../../../App"
+import Menus from "../../enums";
 
 import './styles.scss'
 

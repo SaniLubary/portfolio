@@ -7,7 +7,7 @@ import adusSvg from "../../assets/icons/workPlaces/adus.svg";
 import andesSvg from "../../assets/icons/workPlaces/andes.svg";
 import globantSvg from "../../assets/icons/workPlaces/globant.svg";
 import muniSvg from "../../assets/icons/workPlaces/muni.svg";
-import { WavesSvg } from "../../components/WaveSvg";
+import { WavesSvg } from "../../components/atoms/WaveSvg";
 
 // Components
 import GlobantDescription from "./GlobantDescription";

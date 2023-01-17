@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Navbar from "./components/Navbar";
+import Navbar from "./components/organisms/Navbar";
 import Menus from "./components/enums";
 
 import "./app.scss";

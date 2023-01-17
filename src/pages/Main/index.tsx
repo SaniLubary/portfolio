@@ -1,7 +1,7 @@
 import { OrbitControls } from '@react-three/drei'
 import { Canvas, Euler, Vector3 } from '@react-three/fiber'
 import { Suspense, useEffect } from 'react'
-import Model from '../../components/Santi'
+import Model from '../../components/atoms/Santi'
 import { Description, DescriptionText, DescriptionButton, MainModelContainer } from './styles'
 import { Body } from '../../Styles/Styles'
 

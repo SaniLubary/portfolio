@@ -7,16 +7,16 @@ import { Description, DescriptionText } from "../Main/styles";
 import { ModelContainer } from "./styles";
 
 // Components
-import Card from "../../components/Card";
+import Card from "../../components/organisms/Card";
 
 // Assets
 import MountainsSvg from "../../assets/project-images/mountains.svg";
 
 import { catos, art, music } from "./cardsInfo";
 import { Canvas, Euler, Vector3 } from "@react-three/fiber";
-import Model from "../../components/Santi";
+import Model from "../../components/atoms/Santi";
 import gsap from "gsap";
-import { WavesSvg } from "../../components/WaveSvg";
+import { WavesSvg } from "../../components/atoms/WaveSvg";
 
 // 3D Model values
 const position: Vector3 = [-0.3, 1, 0]
