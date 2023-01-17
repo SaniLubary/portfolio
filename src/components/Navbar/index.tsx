@@ -14,7 +14,7 @@ interface NavbarProps {
 }
 
 export default function Navbar(props: NavbarProps) {
-  const navigation = [Menus.SobreMi, Menus.Experiencia, Menus.Conectemos];
+  const navigation = [Menus.About, Menus.Experience, Menus.Contact];
 
   const [focusView, setFocusView] = useState(Menus.Main)
 

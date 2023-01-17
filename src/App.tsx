@@ -27,31 +27,42 @@ function App() {
       <Navbar setView={setView} view={view} />
 
       {/* Body */}
-      {view.waitingAnimation !== "" ? (
-        <RenderBody menu={view.waitingAnimation} />
-      ) : (
-        <RenderBody menu={view.current} />
-      )}
+      <Body menu={view.waitingAnimation !== "" ? view.waitingAnimation : view.current} />
     </>
   );
 }
 
-function RenderBody({ menu }: { menu: string }) {
-  if (menu === Menus.Main) {
-    document.getElementById("root")?.classList.add("fullHeight");
-  } else {
-    document.getElementById("root")?.classList.remove("fullHeight");
+function customRootHtmlCss(action: 'add' | 'remove') {
+  switch (action) {
+    case 'remove':
+      document.getElementById("root")?.classList.remove("fullHeight")
+      document.getElementsByTagName("html")[0]?.classList.remove("overflowY")
+      break;
+    case 'add':
+      document.getElementById("root")?.classList.add("fullHeight")
+      document.getElementsByTagName("html")[0]?.classList.add("overflowY")
+      break;
+    default:
+      throw new Error("Bad action for customRootHtmlCss: " + action);
   }
+}
 
-  if (menu === Menus.Main) {
-    return <Main />;
-  } else if (menu === Menus.Experiencia) {
-    return <Experience />;
-  } else if (menu === Menus.SobreMi) {
-    return <About />;
-  } else if (menu === Menus.Conectemos) {
-    return <Contact />;
-  } else return <></>;
+function Body({ menu }: { menu: string }) {
+  customRootHtmlCss('remove')
+  switch (menu) {
+    case Menus.Main:
+      customRootHtmlCss('add')
+      return <Main />
+    case Menus.About:
+      return <About />
+    case Menus.Experience:
+      return <Experience />
+    case Menus.Contact:
+      customRootHtmlCss('add')
+      return <Contact />
+    default:
+      return <></>
+  }
 }
 
 export default App;
