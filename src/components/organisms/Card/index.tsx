@@ -131,9 +131,10 @@ const Card = ({ cardInfoInit }: CardProps) => {
       images: images,
       title: cardInfo.title,
       details: cardInfo.details,
+      icons: cardInfo.icons
     });
   }
-  console.log(cardInfo.icons)
+
   return (
     <div className="hobbies__cards__card overflow-hidden text-white">
       {/* Image */}
@@ -164,7 +165,7 @@ const Card = ({ cardInfoInit }: CardProps) => {
         })}
       </div>
 
-      {(cardInfo?.icons && cardInfo.icons.length > 0) && <SeparatorLine />}
+      <SeparatorLine />
 
       {/* Card Body */}
       <section className="hobbies__cards__card__body">
@@ -172,12 +173,18 @@ const Card = ({ cardInfoInit }: CardProps) => {
         <p>{cardInfo.details}</p>
       </section>
 
-      <div className="mt-auto mb-2">
-        <SeparatorLine />
-        <div className="flex justify-center">
-          <div>abc</div>
+      {(cardInfo?.icons && cardInfo.icons.length > 0) && <>
+        <div className="mt-auto mb-2">
+          <SeparatorLine />
+          <div className="flex justify-center">
+            {cardInfo.icons.map(icon => <>
+              <a target="_blank" href={icon.path}>
+                <img style={{ height: '24px', margin: '5px' }} src={icon.icon} />
+              </a>
+            </>)}
+          </div>
         </div>
-      </div>
+      </>}
     </div>
   )
 };

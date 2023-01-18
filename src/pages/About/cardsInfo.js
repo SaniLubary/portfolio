@@ -28,7 +28,7 @@ const art = {
   title: 'Art',
   details: 'Relaxing hobbie by which I found a lot of awesome people',
   icons: [
-    { path: '', icon: instagram }
+    { path: 'https://www.instagram.com/sani_unu/', icon: instagram }
   ]
 }
 
@@ -65,8 +65,8 @@ const music = {
   title: 'Music',
   details: 'It was always a very important part in my life, I play some instruments and used to compose a little',
   icons: [
-    { path: '', icon: youtube },
-    { path: '', icon: spotify },
+    { path: 'https://music.youtube.com/playlist?list=PLMurlrstkDbFOHxiN3dCk7s6S9cJBjSQf', icon: youtube },
+    { path: 'https://open.spotify.com/playlist/37i9dQZF1EMeIcKNZDuhdf?si=7ee4ed59238a4723', icon: spotify },
   ]
 }
 
