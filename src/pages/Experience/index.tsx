@@ -36,7 +36,7 @@ export default function Experience() {
 
           <div className="flex justify-end items-center align-middle">
             {workPlacesLogos.map(work => {
-              return <img onClick={() => updateDescription(work.description)} className="p-2 grayToColor cursor-pointer" src={work.src} alt={work.alt} />
+              return <img key={work.alt} onClick={() => updateDescription(work.description)} className="p-2 grayToColor cursor-pointer" src={work.src} alt={work.alt} />
             })}
           </div>
 

@@ -58,7 +58,6 @@ export default function About() {
         </div>
       </InfoWithMountains>
 
-      {/* BottomSection Section */}
       <BottomSection className="dissapearCenter">
         <WavesSvg />
 
@@ -73,7 +72,7 @@ export default function About() {
             <Card cardInfoInit={music}></Card>
           </div>
 
-          <ModelContainer onLeft className="dissapearRight">
+          <ModelContainer onLeft={true} className="dissapearRight">
             <Suspense fallback={null}>
               <Canvas ref={canvasRef} className='animate--appear'>
                 <directionalLight color={'#00ADB5'} position={[5, 1, -19]} intensity={0.2} />

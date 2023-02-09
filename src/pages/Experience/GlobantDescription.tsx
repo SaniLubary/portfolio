@@ -12,7 +12,7 @@ const GlobantDescription = () => {
       <b style={{ color: 'rgb(4, 158, 167)' }}>
         &nbsp; Dropbox &nbsp;
       </b>
-      as a Web UI Dev on Apps with <b>Typescript - React - Redux - Tailwind - Jest - react-testing-library and BEM methodology</b>.
+      as a Web UI Dev on Apps with <b>Typescript - React - Redux - Tailwind - Jest - react-testing-library and Atomic Design</b>.
     </Text>
   </>
 }

@@ -157,7 +157,7 @@ const Card = ({ cardInfoInit }: CardProps) => {
           let selected = img.selected ? "selected" : "not-selected";
           return (
             <div
-              key={img.path + i}
+              key={img.alt}
               onClick={() => handleButtonClick(img)}
               className={`transition-all hobbies__cards__card__selection__${selected}`}
             ></div>

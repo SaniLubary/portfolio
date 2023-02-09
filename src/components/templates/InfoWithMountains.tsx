@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
-import MountainsSvg from "../../assets/project-images/mountains.svg";
 import { TopSection } from "../atoms/TopSection";
+import Mountains from "../atoms/Mountains";
 
 interface IInfoWithMountains {
   flip?: boolean;
@@ -10,7 +10,9 @@ interface IInfoWithMountains {
 const InfoWithMountains = ({ children, flip = false }: IInfoWithMountains) => {
   return <TopSection>
     <Suspense fallback={null}>
-      <img className={`dissapearCenter absolute ${flip ? ' left-24 -scale-x-100 ' : 'right-24'}`} src={MountainsSvg} alt="Mountains" />
+      <div className={`dissapearCenter absolute ${flip ? ' left-24 -scale-x-100 ' : 'right-24'}`}>
+        <Mountains />
+      </div>
     </Suspense>
 
     {children}

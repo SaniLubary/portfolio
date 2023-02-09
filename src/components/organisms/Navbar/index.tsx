@@ -30,7 +30,6 @@ export default function Navbar(props: NavbarProps) {
     gsap.timeline()
       .to(navBar.current, {
         scrollTrigger: {
-          markers: true,
           trigger: "body",
           start: "center 50%",
           end: "60% 50%",

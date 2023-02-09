@@ -58,7 +58,7 @@ function Body({ menu }: { menu: string }) {
     case Menus.Experience:
       return <Experience />
     case Menus.Contact:
-      customRootHtmlCss('add')
+      customRootHtmlCss('remove')
       return <Contact />
     default:
       return <></>
