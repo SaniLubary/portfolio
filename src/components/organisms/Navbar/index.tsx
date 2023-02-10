@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Disclosure } from "@headlessui/react";
-import gsap from 'gsap'
+import { gsap } from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 
 import { View } from "../../../App"

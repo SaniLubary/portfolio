@@ -13,7 +13,7 @@ import Card from "../../components/organisms/Card";
 import { catos, art, music } from "./cardsInfo";
 import { Canvas, Euler, Vector3 } from "@react-three/fiber";
 import Model from "../../components/atoms/Santi";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { WavesSvg } from "../../components/atoms/WaveSvg";
 import { Text } from "../../components/atoms/Text";
 

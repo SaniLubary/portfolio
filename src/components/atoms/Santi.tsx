@@ -45,7 +45,7 @@ type ModelType = JSX.IntrinsicElements["group"] & {
 }
 
 export default function Model({ ...props }: ModelType) {
-  const group = useRef<THREE.Group>();
+  const group = useRef<any>();
   const { nodes, materials } = useGLTF("src/assets/santi2.glb") as GLTFResult;
 
   return (

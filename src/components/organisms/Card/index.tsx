@@ -1,5 +1,5 @@
 import { MutableRefObject, useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import styled from "styled-components";
 
 const SeparatorLine = styled.div`
@@ -153,7 +153,7 @@ const Card = ({ cardInfoInit }: CardProps) => {
 
       {/* Image selection */}
       <div className="hobbies__cards__card__selection">
-        {cardInfo.images.map((img, i) => {
+        {cardInfo.images.map((img) => {
           let selected = img.selected ? "selected" : "not-selected";
           return (
             <div

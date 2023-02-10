@@ -1,5 +1,5 @@
 import { MutableRefObject } from "react";
-import gsap from "gsap";
+import { gsap } from "gsap";
 
 export const floatAnimation = (ref: MutableRefObject<any>) => {
   const tl = gsap.timeline();

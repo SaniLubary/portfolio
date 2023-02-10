@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import { gsap } from "gsap";
 
 export function fadeOut(elem: HTMLElement) {
   gsap.to(elem, {

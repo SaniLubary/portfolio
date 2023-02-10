@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import gsap from "gsap";
+import { gsap } from "gsap";
 import { WavesSvg } from "../../components/atoms/WaveSvg";
 import { BottomSection, UnderWavesSection } from "../../Styles/Styles";
 import OnlySun from "../../components/atoms/OnlySun";

@@ -24,7 +24,7 @@ export default function Main() {
   return (
     <Body className='animate--appear'>
       {/* Left */}
-      <div className='dissapearLeft'>
+      <div className='dissapearLeft fixed z-10'>
         <Text size='medium'>
           Hola! Soy Santi
         </Text>
