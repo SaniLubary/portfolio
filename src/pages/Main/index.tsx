@@ -26,11 +26,11 @@ export default function Main() {
       {/* Left */}
       <div className='dissapearLeft fixed z-10'>
         <Text size='medium'>
-          Hola! Soy Santi
+          Hi! I'm Santi
         </Text>
         <Text size='large'>
-          Desarrollador Web<br />
-          Full - Stack
+          Web Ui<br />
+          Dev
         </Text>
         <DescriptionButton style={{ fontSize: 16 }}>
           descargar cv
