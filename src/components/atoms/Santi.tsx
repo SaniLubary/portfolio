@@ -557,4 +557,4 @@ export default function Model({ ...props }: ModelType) {
   );
 }
 
-useGLTF.preload("src/assets/santi2.glb");
+useGLTF.preload("public/santi2.glb");
