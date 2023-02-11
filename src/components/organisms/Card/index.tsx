@@ -136,7 +136,7 @@ const Card = ({ cardInfoInit }: CardProps) => {
   }
 
   return (
-    <div className="hobbies__cards__card overflow-hidden text-white">
+    <div className="hobbies__cards__card z-50 overflow-hidden text-white">
       {/* Image */}
       <div
         onClick={() => handleImageClick()}

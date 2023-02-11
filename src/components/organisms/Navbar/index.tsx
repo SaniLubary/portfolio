@@ -112,11 +112,7 @@ export default function Navbar(props: NavbarProps) {
                   nav__option 
                   text-white
                   cursor-pointer
-                  flex
-                  items-center
-                  justify-center 
-                  text-center 
-                  px-4 
+                  pl-4 
                   ${focusView === menu && 'nav__option--focused'}
                 `}>
                 {menu}
@@ -149,9 +145,9 @@ const Nav = tw.nav`
 `
 
 const NavMenu = styled.div`
-  grid-column: 6/13;
+  grid-column: 6/12;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
 `

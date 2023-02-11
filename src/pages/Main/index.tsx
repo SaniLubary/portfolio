@@ -56,7 +56,7 @@ export default function Main() {
             <directionalLight color={'#00ADB5'} position={[5, 1, -19]} intensity={0.4} />
             <directionalLight color={'#00ADB5'} position={[-500, 1, -100]} intensity={0.3} />
             <directionalLight position={[5, 1, 10]} intensity={1} />
-            <Model laptop={true} position={position} rotation={rotation} scale={scale} />
+            <Model bbanchor={true} laptop={true} position={position} rotation={rotation} scale={scale} />
           </Canvas>
         </Suspense>
       </MainModelContainer >

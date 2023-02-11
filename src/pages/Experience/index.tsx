@@ -2,61 +2,68 @@ import React, { useState } from "react";
 import "./styles.scss";
 
 // Assets
-import adusSvg from "../../assets/icons/workPlaces/adus.svg";
-import andesSvg from "../../assets/icons/workPlaces/andes.svg";
-import globantSvg from "../../assets/icons/workPlaces/globant.svg";
-import muniSvg from "../../assets/icons/workPlaces/muni.svg";
-import { WavesSvg } from "../../components/atoms/WaveSvg";
+import adusSvg from "/assets/icons/workPlaces/adus.svg";
+import andesSvg from "/assets/icons/workPlaces/andes.svg";
+import globantSvg from "/assets/icons/workPlaces/globant.svg";
+import muniSvg from "/assets/icons/workPlaces/muni.svg";
 
 // Components
 import GlobantDescription from "./GlobantDescription";
-import { BottomSection, UnderWavesSection } from "../../Styles/Styles";
 import InfoWithMountains from "../../components/templates/InfoWithMountains";
 import ExperienceTitle from "../../components/molecules/ExperienceTitle";
+import AndesDescription from "./AndesDescription";
+import MuniDescription from "./MuniDescription";
+import AdusDescription from "./AdusDescription";
+import { WavesSvg } from "../../components/atoms/WaveSvg";
+import { BottomSection } from "../../components/templates/BottomSection";
 
 const workPlacesLogos = [
   { src: globantSvg, alt: 'Globant logo', description: <GlobantDescription /> },
-  { src: andesSvg, alt: 'Andes logo', description: '' },
-  { src: muniSvg, alt: 'Muni logo', description: '' },
-  { src: adusSvg, alt: 'Adus logo', description: '' },
+  { src: andesSvg, alt: 'Andes logo', description: <AndesDescription /> },
+  { src: muniSvg, alt: 'Muni logo', description: <MuniDescription /> },
+  { src: adusSvg, alt: 'Adus logo', description: <AdusDescription /> },
 ]
 
 export default function Experience() {
-  const [description, setDescription] = useState<null | string | React.ReactElement>(null)
+  const [description, setDescription] = useState<null | string | React.ReactElement>(workPlacesLogos[0].description)
 
-  function updateDescription(elem: null | string | React.ReactElement) {
+  function handleLogoClick(elem: null | string | React.ReactElement) {
     setDescription(elem)
   }
 
   return (
     <>
       <InfoWithMountains flip={true}>
-        <div className="flex flex-col dissapearRight absolute right-24 justify-end">
-          <ExperienceTitle />
+        <>
+          <div className="dissapearRight z-50"
+            style={{
+              gridColumn: '6/12',
+              gridRow: '2/4',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <ExperienceTitle />
 
-          <div className="flex justify-end items-center align-middle">
-            {workPlacesLogos.map(work => {
-              return <img key={work.alt} onClick={() => updateDescription(work.description)} className="p-2 grayToColor cursor-pointer" src={work.src} alt={work.alt} />
-            })}
-          </div>
+            <div className="flex justify-end items-center align-middle">
+              {workPlacesLogos.map(work => {
+                return <img key={work.alt} onClick={() => handleLogoClick(work.description)} className="p-2 grayToColor cursor-pointer" src={work.src} alt={work.alt} />
+              })}
+            </div>
 
-          <div className="w-2/5 text-right self-end" style={{ color: '#EEEEEE' }}>
-            {description && description}
+            <div className="w-4/5 text-right self-end" style={{ color: '#EEEEEE' }}>
+              {description && description}
+            </div>
           </div>
-        </div>
+          <BottomSection className="dissapearCenter" style={{
+            gridColumn: '1/13',
+            gridRow: '5/8'
+          }}>
+            <WavesSvg />
+          </BottomSection>
+        </>
       </InfoWithMountains>
 
-      {/* BottomSection Section */}
-      <BottomSection className="dissapearCenter">
-        <div style={{ marginTop: '8em' }}>
-          <WavesSvg />
-        </div>
-        <UnderWavesSection>
-          <h1 className="hobbies__title">
-            En mis tiempos libres tambien disfruto
-          </h1>
-        </UnderWavesSection>
-      </BottomSection>
     </>
   );
 }

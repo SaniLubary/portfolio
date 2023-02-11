@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import { TopSection } from "../atoms/TopSection";
 import Mountains from "../atoms/Mountains";
 
 interface IInfoWithMountains {
@@ -8,15 +7,20 @@ interface IInfoWithMountains {
 }
 
 const InfoWithMountains = ({ children, flip = false }: IInfoWithMountains) => {
-  return <TopSection>
+  return <div className='animate--appear'
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(12, minmax(0, 1fr))',
+      gridTemplateRows: 'repeat(8, minmax(0, 1fr))'
+    }}>
     <Suspense fallback={null}>
-      <div className={`dissapearCenter absolute ${flip ? ' left-24 -scale-x-100 ' : 'right-24'}`}>
+      <div className={`dissapearCenter absolute -bottom-24 ${flip ? ' left-0 -scale-x-100 ' : 'right-0'}`}>
         <Mountains />
       </div>
     </Suspense>
 
     {children}
-  </TopSection>;
+  </div >;
 };
 
 export default InfoWithMountains

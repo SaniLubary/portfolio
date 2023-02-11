@@ -9,7 +9,7 @@
   "dependencies": {
     "@headlessui/react": "^1.4.2",
     "@microsoft/eslint-formatter-sarif": "^2.1.7",
-    "@react-three/drei": "^8.6.0",
+    "@react-three/drei": "9.56.23",
     "@react-three/fiber": "^8.11.0",
     "gsap": "^3.10.2",
     "react": "^18.2.0",

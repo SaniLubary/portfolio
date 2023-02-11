@@ -3,7 +3,6 @@ import styled from "styled-components";
 import tw from "tailwind-styled-components";
 import { WavesSvg } from "../atoms/WaveSvg";
 
-
 export const BottomSection = tw.div`
   relative
   text-white

@@ -50,40 +50,48 @@ export default function About() {
   return (
     <>
       <InfoWithMountains>
-        <div className="left-desc dissapearLeft">
-          <div className="left-desc__desc">
-            <Text size='large'>I love</Text>
-            <Text size='large'>{`>`}</Text>
+        <>
+          <div className="left-desc dissapearLeft" style={{
+            gridColumn: '2/6',
+            gridRow: '2/2'
+          }}>
+            <div className="left-desc__desc">
+              <Text size='large'>I love</Text>
+              <Text size='medium'>{`>`}</Text>
+            </div>
           </div>
-        </div>
+          <BottomSection className="dissapearCenter" style={{
+            gridColumn: '1/13',
+            gridRow: '4/9'
+          }}>
+            <WavesSvg />
+
+            <UnderWavesSection>
+              <h1 className="hobbies__title z-50">
+                En mis tiempos libres tambien disfruto
+              </h1>
+
+              <div className="hobbies__cards">
+                <Card cardInfoInit={art}></Card>
+                <Card cardInfoInit={catos}></Card>
+                <Card cardInfoInit={music}></Card>
+              </div>
+
+              <ModelContainer onLeft={true} className="dissapearRight z-10">
+                <Suspense fallback={null}>
+                  <Canvas ref={canvasRef} className='animate--appear'>
+                    <directionalLight color={'#00ADB5'} position={[5, 1, -19]} intensity={0.2} />
+                    <directionalLight color={'#00ADB5'} position={[-500, 1, -100]} intensity={1} />
+                    <directionalLight position={[5, 1, 10]} intensity={1} />
+                    <Model position={position} rotation={rotation} scale={scale} />
+                  </Canvas>
+                </Suspense>
+              </ModelContainer>
+            </UnderWavesSection>
+          </BottomSection>
+        </>
       </InfoWithMountains>
 
-      <BottomSection className="dissapearCenter">
-        <WavesSvg />
-
-        <UnderWavesSection>
-          <h1 className="hobbies__title">
-            En mis tiempos libres tambien disfruto
-          </h1>
-
-          <div className="hobbies__cards">
-            <Card cardInfoInit={art}></Card>
-            <Card cardInfoInit={catos}></Card>
-            <Card cardInfoInit={music}></Card>
-          </div>
-
-          <ModelContainer onLeft={true} className="dissapearRight">
-            <Suspense fallback={null}>
-              <Canvas ref={canvasRef} className='animate--appear'>
-                <directionalLight color={'#00ADB5'} position={[5, 1, -19]} intensity={0.2} />
-                <directionalLight color={'#00ADB5'} position={[-500, 1, -100]} intensity={1} />
-                <directionalLight position={[5, 1, 10]} intensity={1} />
-                <Model position={position} rotation={rotation} scale={scale} />
-              </Canvas>
-            </Suspense>
-          </ModelContainer>
-        </UnderWavesSection>
-      </BottomSection>
     </>
   );
 }
