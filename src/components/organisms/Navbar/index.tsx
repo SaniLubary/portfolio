@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Disclosure } from "@headlessui/react";
 import { gsap } from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 
@@ -7,6 +6,11 @@ import { View } from "../../../App"
 import Menus from "../../enums";
 
 import './styles.scss'
+import tw from "tailwind-styled-components";
+import { useMediaQuery } from "../../../utils/useMediaQuery";
+import { device } from "../../../utils/breakpoints";
+import styled from "styled-components";
+import HamburgerIcon from "../../atoms/HamburgerIcon";
 
 interface NavbarProps {
   view: View,
@@ -14,9 +18,10 @@ interface NavbarProps {
 }
 
 export default function Navbar(props: NavbarProps) {
-  const navigation = [Menus.About, Menus.Experience, Menus.Contact];
+  const navigation = [Menus.Experience, Menus.About, Menus.Contact];
 
   const [focusView, setFocusView] = useState(Menus.Main)
+  const matchesTablet = useMediaQuery(device.tablet)
 
   const previousView = useRef(focusView)
   const navBar = useRef<HTMLDivElement>(null)
@@ -83,74 +88,70 @@ export default function Navbar(props: NavbarProps) {
 
   return (
     <>
-      <div ref={navBar} className="bg-black bg-opacity-0 backdrop-filter backdrop-blur-sm fixed w-full z-40">
-        <nav className="flex justify-between px-16 py-8">
-          {/* Logo */}
-          <Disclosure>
-            {({ open }: { open: boolean }) => (
-              <>
-                <div className="flex lg:flex-wrap w-full lg:w-auto">
-                  <div>
-                    <a onClick={() => props.view.current !== Menus.Main && showMenu(Menus.Main)} className="cursor-pointer">
-                      <div className="logo">Santi Lubary</div>
-                    </a>
-                  </div>
-
-                  <Disclosure.Button
-                    aria-label="Toggle Menu"
-                    className="px-2 py-1 ml-auto lg:hidden focus:outline-none">
-                    <svg
-                      className="w-6 h-6 fill-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24">
-                      {open && (
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
-                        />
-                      )}
-                      {!open && (
-                        <path
-                          fillRule="evenodd"
-                          d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-                        />
-                      )}
-                    </svg>
-                  </Disclosure.Button>
-
-                  <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">
-                    <>
-                      {navigation.map((menu, index) => (
-                        <div key={index}>
-                          <a onClick={() => showMenu(menu)} className={`nav__option text-white cursor-pointer flex items-center justify-center text-center px-4 py-2 ${focusView === menu && 'nav__option--focused'}`}>
-                            {menu}
-                          </a>
-                        </div>
-                      ))}
-                    </>
-                  </Disclosure.Panel>
-                </div>
-              </>
-            )}
-          </Disclosure>
-
-          {/* menu  */}
-          <div className="hidden text-center lg:flex lg:items-center">
-            <ul className="items-center justify-end flex-1 pt-6 lg:pt-0 list-reset lg:flex">
-              {navigation.map((menu, index) => (
-                <li className="mr-3 nav__item" key={index}>
-                  <div>
-                    <a onClick={() => showMenu(menu)} className={`text-white nav__option px-4 py-2 ${focusView === menu && 'nav__option--focused'}`}>
-                      {menu}
-                    </a>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
-      </div>
+      <Nav
+        ref={navBar}
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(12, minmax(0, 1fr))',
+        }}
+      >
+        <Logo
+          onClick={() => props.view.current !== Menus.Main && showMenu(Menus.Main)}
+          matchesTablet={matchesTablet}
+          className="logo"
+        >
+          Santi Lubary
+        </Logo>
+        {matchesTablet
+          ? <NavMenu>
+            {navigation.map((menu, index) => (
+              <a
+                onClick={() => showMenu(menu)}
+                key={index}
+                className={`
+                  nav__option 
+                  text-white
+                  cursor-pointer
+                  flex
+                  items-center
+                  justify-center 
+                  text-center 
+                  px-4 
+                  ${focusView === menu && 'nav__option--focused'}
+                `}>
+                {menu}
+              </a>
+            ))}
+          </NavMenu>
+          : <HamburgerIcon style={{ fill: 'white', transform: 'scale(.3)' }} />}
+      </Nav>
     </>
   );
 }
+
+const Logo = styled.div<{ matchesTablet: boolean }>`
+  cursor: pointer;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 24px 0;
+  grid-column: ${({ matchesTablet }) => !matchesTablet ? '2/10' : '2/5'};
+`
+
+const Nav = tw.nav`
+  bg-black
+  bg-opacity-0
+  backdrop-filter
+  backdrop-blur-sm
+  fixed
+  w-full
+  z-40
+`
+
+const NavMenu = styled.div`
+  grid-column: 6/13;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`

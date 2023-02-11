@@ -5,7 +5,6 @@ import { Canvas, Euler, Vector3 } from '@react-three/fiber'
 import Model from '../../components/atoms/Santi'
 import { DescriptionButton } from './styles'
 import { MainModelContainer } from "./MainModelContainer"
-import { Body } from '../../Styles/Styles'
 import { Text } from '../../components/atoms/Text'
 
 // 3D Model values
@@ -22,22 +21,34 @@ export default function Main() {
   }, [])
 
   return (
-    <Body className='animate--appear'>
+    <div
+      className='animate--appear'
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(12, minmax(0, 1fr))',
+        gridTemplateRows: 'repeat(8, minmax(0, 1fr))'
+      }}
+    >
       {/* Left */}
-      <div className='dissapearLeft fixed z-10'>
+      <div
+        className='dissapearLeft z-10'
+        style={{
+          gridColumn: '2/8',
+          gridRow: '5/8',
+        }}
+      >
         <Text size='medium'>
           Hi! I'm Santi
         </Text>
         <Text size='large'>
-          Web Ui<br />
-          Dev
+          Web UI Developer
         </Text>
         <DescriptionButton style={{ fontSize: 16 }}>
           descargar cv
         </DescriptionButton>
       </div>
       {/* Right */}
-      <MainModelContainer className="animate--appear dissapearRight">
+      <MainModelContainer className="animate--appear dissapearRight" >
         <Suspense fallback={null}>
           <Canvas>
             <OrbitControls />
@@ -48,7 +59,7 @@ export default function Main() {
             <Model laptop={true} position={position} rotation={rotation} scale={scale} />
           </Canvas>
         </Suspense>
-      </MainModelContainer>
-    </Body>
+      </MainModelContainer >
+    </div>
   )
 }

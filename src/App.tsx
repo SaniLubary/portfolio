@@ -22,13 +22,13 @@ function App() {
   });
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <Navbar setView={setView} view={view} />
 
       {/* Body */}
       <Body menu={view.waitingAnimation !== "" ? view.waitingAnimation : view.current} />
-    </>
+    </div>
   );
 }
 

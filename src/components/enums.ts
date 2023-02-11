@@ -1,8 +1,8 @@
 const Menus = {
   Main: "Main",
-  About: "Sobre Mi",
-  Experience: "Experiencia",
-  Contact: "Conectemos!"
+  About: "About Me",
+  Experience: "Experience",
+  Contact: "Get in touch!"
 }
 
 export default Menus
