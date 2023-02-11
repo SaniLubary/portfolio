@@ -46,7 +46,7 @@ type ModelType = JSX.IntrinsicElements["group"] & {
 
 export default function Model({ ...props }: ModelType) {
   const group = useRef<any>();
-  const { nodes, materials } = useGLTF("src/assets/santi2.glb") as GLTFResult;
+  const { nodes, materials } = useGLTF("public/santi2.glb") as GLTFResult;
 
   return (
     <group ref={group} {...props} dispose={null}>
