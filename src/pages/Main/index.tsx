@@ -1,6 +1,8 @@
 import { Suspense, useEffect } from 'react'
 import { OrbitControls } from '@react-three/drei'
 import { Canvas, Euler, Vector3 } from '@react-three/fiber'
+import { device } from "../../utils/breakpoints";
+import { useMediaQuery } from "../../utils/useMediaQuery";
 
 import Model from '../../components/atoms/Santi'
 import { DescriptionButton } from './styles'
@@ -13,6 +15,8 @@ const rotation: Euler = [0.2, -0.6, 0.2]
 const scale = 0.7
 
 export default function Main() {
+  const matchesTabletAndUp = useMediaQuery(device.tablet)
+  
   useEffect(() => {
     function handleResize() {
       console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
@@ -34,7 +38,7 @@ export default function Main() {
         className='dissapearLeft z-10'
         style={{
           gridColumn: '2/8',
-          gridRow: '5/8',
+          gridRow: matchesTabletAndUp ? '5/8' : '3/5',
         }}
       >
         <Text size='medium'>
