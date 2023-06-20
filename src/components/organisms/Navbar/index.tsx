@@ -5,8 +5,6 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { View } from "../../../App"
 import Menus from "../../enums";
 
-import './styles.scss'
-import tw from "tailwind-styled-components";
 import { useMediaQuery } from "../../../utils/useMediaQuery";
 import { device } from "../../../utils/breakpoints";
 import styled from "styled-components";
@@ -21,14 +19,9 @@ export default function Navbar(props: NavbarProps) {
   const navigation = [Menus.Experience, Menus.About, Menus.Contact];
 
   const [focusView, setFocusView] = useState(Menus.Main)
-  const matchesTablet = useMediaQuery(device.tablet)
+  const matchesLaptop = useMediaQuery(device.laptop)
 
-  const previousView = useRef(focusView)
   const navBar = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    previousView.current = focusView
-  }, [focusView])
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -87,61 +80,74 @@ export default function Navbar(props: NavbarProps) {
   }
 
   return (
-    <>
-      <Nav
-        ref={navBar}
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(12, minmax(0, 1fr))',
-        }}
+    <Nav
+      ref={navBar}
+    >
+      <Logo
+        onClick={() => props.view.current !== Menus.Main && showMenu(Menus.Main)}
+        matchesLaptop={matchesLaptop}
       >
-        <Logo
-          onClick={() => props.view.current !== Menus.Main && showMenu(Menus.Main)}
-          matchesTablet={matchesTablet}
-          className="logo"
-        >
-          Santi Lubary
-        </Logo>
-        {matchesTablet
-          ? <NavMenu>
-            {navigation.map((menu, index) => (
-              <a
-                onClick={() => showMenu(menu)}
-                key={index}
-                className={`
-                  nav__option 
-                  text-white
-                  cursor-pointer
-                  pl-4 
-                  ${focusView === menu && 'nav__option--focused'}
-                `}>
-                {menu}
-              </a>
-            ))}
-          </NavMenu>
-          : <HamburgerIcon style={{ fill: 'white', transform: 'scale(.3)' }} />}
-      </Nav>
-    </>
+        Santi Lubary
+      </Logo>
+      {matchesLaptop
+        ? <NavMenu>
+          {navigation.map((menu, index) => (
+            <Link
+              key={index}
+              onClick={() => showMenu(menu)}
+              focusView={focusView === menu}
+            >
+              {menu}
+            </Link>
+          ))}
+        </NavMenu>
+        : <HamburgerIcon style={{ fill: 'white', transform: 'scale(.3)' }} />}
+    </Nav>
   );
 }
 
-const Logo = styled.div<{ matchesTablet: boolean }>`
+const Logo = styled.div<{ matchesLaptop: boolean }>`
   cursor: pointer;
   display: flex;
   justify-content: start;
   align-items: center;
   padding: 24px 0;
-  grid-column: ${({ matchesTablet }) => !matchesTablet ? '2/10' : '2/5'};
+  grid-column: ${({ matchesLaptop }) => !matchesLaptop ? '2/10' : '2/5'};
+  color: rgb(239,239,239);
+  font: 32px/1.2 "Atomic Age", Helvetica, Arial, serif;
+  letter-spacing: '0px';
+  @media ${device.desktop} {
+    font-size: 64px;
+  }
 `
 
-const Nav = tw.nav`
-  bg-black
-  bg-opacity-0
-  backdrop-filter
-  backdrop-blur-sm
-  fixed
-  w-full
-  z-40
+const Link = styled.a<{ focusView: boolean }>`
+  font: 28px/1.2 "Poppins", Helvetica, Arial, serif;
+  color: ${({ focusView }) => focusView ? 'rgb(0, 174, 182)' : 'rgb(192, 192, 192)'};
+  text-align: end;
+  margin-left: 24px;
+  &:hover {
+    cursor: pointer;
+    color: rgb(4, 158, 167); 
+  }
+  @media ${device.laptopL} {
+    font-size: 32px;
+  }
+  @media ${device.desktop} {
+    font-size: 42px;
+  }
+  @media ${device.desktopL} {
+    font-size: 64px;
+  }
+`
+
+const Nav = styled.nav`
+  position: fixed;
+  backdrop-filter: blur(4px);
+  width: 100%;
+  z-index: 999;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 `
 
 const NavMenu = styled.div`

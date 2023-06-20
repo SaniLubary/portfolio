@@ -1,35 +1,31 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
 
-const TextSmall = styled.span`
-  font: 16 "Poppins", Helvetica, Arial, serif;
-`;
-const TextMedium = styled.span`
-  font: 44px/1.2 "Poppins", Helvetica, Arial, serif;
-  line-height: 1.2;
-`;
-const TextLarge = styled.span`
-  font: 64px "Poppins", Helvetica, Arial, serif;
-  line-height: 1.2;
-`;
+const small = '16px'
+const medium = '44px/1.2'
+const large = '64px'
 
-const TextDefaults = styled.section`
+const sizes = {
+  small, medium, large
+}
+
+const TextDefaults = styled.span<{ size: string }>`
   font-style: normal;
   font-weight: normal;
   letter-spacing: 0px;
   color: #EEEEEE;
+  font: ${({ size }) => size} "Poppins", Helvetica, Arial, serif;
 `
 
 type Props = {
   size: 'small' | 'medium' | 'large',
   className?: string,
-  children: React.ReactChild | React.ReactChild[]
+  children: (string | React.ReactElement)[] | React.ReactElement | React.ReactElement[] | string[] | string
+  style?: CSSProperties
 };
 
-export const Text = ({ size, children, className }: Props) => {
-  return <TextDefaults className={className}>
-    {size === 'small' && <TextSmall>{children}</TextSmall>}
-    {size === 'medium' && <TextMedium>{children}</TextMedium>}
-    {size === 'large' && <TextLarge>{children}</TextLarge>}
+export const Text = ({ size, children, className, style }: Props) => {
+  return <TextDefaults size={sizes[size]} style={style} className={className}>
+    {children}
   </TextDefaults>
 };

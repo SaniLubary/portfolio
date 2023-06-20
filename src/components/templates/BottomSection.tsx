@@ -1,13 +1,7 @@
-import React from "react";
+import { ReactElement } from "react";
 import styled from "styled-components";
-import tw from "tailwind-styled-components";
 import { WavesSvg } from "../atoms/WaveSvg";
-
-export const BottomSection = tw.div`
-  relative
-  text-white
-  overflow-hidden
-`;
+import { BottomSection } from "../../Styles/Styles";
 
 export const UnderWavesSection = styled.div`
   top: 50%;
@@ -16,7 +10,7 @@ export const UnderWavesSection = styled.div`
   background-color: 'blue';
 `;
 
-export const WaveSection: React.FunctionComponent = ({ children }) => {
+export const WaveSection = ({ children }: { children: ReactElement }) => {
   return <BottomSection className="dissapearCenter">
     <WavesSvg />
     <UnderWavesSection>

@@ -22,12 +22,24 @@ interface CardProps {
     icons?: { path: string, icon: string }[];
   };
 }
-
+function getRandomInt(min: number, max: number) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 const floatAnimation = (ref: MutableRefObject<any>) => {
   const tl = gsap.timeline()
   tl.repeat(-1)
   tl.yoyo(true)
-  tl.to(ref.current, { duration: 5, scale: 1.5, y: '+=4', x: '+=3', rotation: '-=2', ease: "power1.ease" })
+  tl.to(ref.current,
+    {
+      duration: getRandomInt(3, 5),
+      scale: 1.5,
+      y: '+=4',
+      x: '+=3',
+      rotation: `-=${getRandomInt(-3, 3)}`,
+      ease: "power1.ease"
+    })
 }
 
 const Card = ({ cardInfoInit }: CardProps) => {
@@ -39,7 +51,7 @@ const Card = ({ cardInfoInit }: CardProps) => {
     if (refImage.current) {
       floatAnimation(refImage)
     }
-  })
+  }, [])
 
   const handleButtonClick = (img: CardProps["cardInfoInit"]["images"][0]) => {
     if (img.selected || !refImage?.current) return
@@ -178,7 +190,7 @@ const Card = ({ cardInfoInit }: CardProps) => {
           <SeparatorLine />
           <div className="flex justify-center">
             {cardInfo.icons.map(icon => <>
-              <a target="_blank" href={icon.path}>
+              <a target="_blank" key={icon.path} href={icon.path}>
                 <img style={{ height: '24px', margin: '5px' }} src={icon.icon} />
               </a>
             </>)}

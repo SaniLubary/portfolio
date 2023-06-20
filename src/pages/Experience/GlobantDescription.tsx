@@ -5,14 +5,17 @@ const GlobantDescription = () => {
     <Text size="medium" className="font-extrabold text-2xl">Globant</Text>
     <Text size="small">
       I've worked for accounts
-      <b style={{ color: 'rgb(4, 158, 167)' }}>
-        &nbsp; Earnest & Young &nbsp;
+      <b style={{ color: '#D9AD0A' }}>
+        &nbsp; Earnest & Young
+      </b>,
+      <b style={{ color: '#D9AD0A' }}>
+        &nbsp; Luminate &nbsp;
       </b>
       and
-      <b style={{ color: 'rgb(4, 158, 167)' }}>
+      <b style={{ color: '#D9AD0A' }}>
         &nbsp; Dropbox &nbsp;
       </b>
-      as a Web UI Dev on Apps with <b>Typescript - React - Redux - Jest - Atomic Design</b>.
+      as a Web UI Dev on Apps with <b>Typescript - React - Redux - Jest - Atomic Design - MUI - AG-Grid</b>.
     </Text>
   </>
 }

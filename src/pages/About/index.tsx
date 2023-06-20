@@ -92,12 +92,12 @@ export default function About() {
     <>
       <InfoWithMountains>
         <>
-          <div className="left-desc dissapearLeft z-50" style={{
+          <div className="dissapearLeft z-50" style={{
             gridColumn: matchesLaptopAndUp ? '2/6' : '2/12',
             gridRow: matchesLaptopAndUp ? '2/2' : '1/3',
             marginTop: matchesLaptopAndUp ? '' : '6em'
           }}>
-            <div className="left65-desc__desc z-50">
+            <div className="z-50">
               <Text size='large'>I love</Text>
               <div style={{ display: 'flex' }}>
                 <Text size='medium'>
@@ -128,7 +128,7 @@ export default function About() {
                 top: matchesLaptopAndUp ? '' : '-2em',
                 transform: matchesLaptopAndUp ? '' : 'scale(0.6)',
                 left: matchesLaptopAndUp ? '' : '3  em'
-              }} onLeft={true} className="dissapearRight">
+              }} leftSide={true} className="dissapearRight">
                 <Suspense fallback={null}>
                   <Canvas ref={canvasRef} className='animate--appear'>
                     <directionalLight color={'#00ADB5'} position={[5, 1, -19]} intensity={0.2} />

@@ -14,8 +14,8 @@ import ExperienceTitle from "../../components/molecules/ExperienceTitle";
 import AndesDescription from "./AndesDescription";
 import MuniDescription from "./MuniDescription";
 import AdusDescription from "./AdusDescription";
-import { WavesSvg } from "../../components/atoms/WaveSvg";
-import { BottomSection } from "../../components/templates/BottomSection";
+import { device } from "../../utils/breakpoints";
+import { useMediaQuery } from "../../utils/useMediaQuery";
 
 const workPlacesLogos = [
   { src: globantSvg, alt: 'Globant logo', description: <GlobantDescription /> },
@@ -26,6 +26,7 @@ const workPlacesLogos = [
 
 export default function Experience() {
   const [description, setDescription] = useState<null | string | React.ReactElement>(workPlacesLogos[0].description)
+  const matchesLaptopAndUp = useMediaQuery(device.laptop)
 
   function handleLogoClick(elem: null | string | React.ReactElement) {
     setDescription(elem)
@@ -37,7 +38,7 @@ export default function Experience() {
         <>
           <div className="dissapearRight z-50"
             style={{
-              gridColumn: '6/12',
+              gridColumn: matchesLaptopAndUp ? '6/12' : '1/12',
               gridRow: '2/4',
               display: 'flex',
               flexDirection: 'column',
@@ -45,22 +46,21 @@ export default function Experience() {
           >
             <ExperienceTitle />
 
-            <div className="flex justify-end items-center align-middle">
+            <div
+              className="flex justify-end items-center align-middle"
+              style={{
+                flexDirection: matchesLaptopAndUp ? 'row' : 'column',
+                alignItems: matchesLaptopAndUp ? 'center' : 'end',
+              }}>
               {workPlacesLogos.map(work => {
                 return <img key={work.alt} onClick={() => handleLogoClick(work.description)} className="p-2 grayToColor cursor-pointer" src={work.src} alt={work.alt} />
               })}
             </div>
 
-            <div className="w-4/5 text-right self-end" style={{ color: '#EEEEEE' }}>
+            <div className="w-4/5 flex flex-col text-right self-end" style={{ color: '#EEEEEE' }}>
               {description && description}
             </div>
           </div>
-          <BottomSection className="dissapearCenter" style={{
-            gridColumn: '1/13',
-            gridRow: '5/8'
-          }}>
-            <WavesSvg />
-          </BottomSection>
         </>
       </InfoWithMountains>
 

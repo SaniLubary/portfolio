@@ -1,11 +1,10 @@
 import styled from "styled-components"
-import tw from "tailwind-styled-components"
 
-export const BottomSection = tw.div`
-  relative
-  text-white
-  overflow-hidden
-`
+export const BottomSection = styled.div`
+  position: relative;
+  color: white;
+  overflow: hidden;
+`;
 
 export const UnderWavesSection = styled.div`
   top: 50%;

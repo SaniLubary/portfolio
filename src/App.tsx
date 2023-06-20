@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Navbar from "./components/organisms/Navbar";
 import Menus from "./components/enums";
@@ -20,6 +20,10 @@ function App() {
     current: Menus.Main,
     waitingAnimation: "",
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [view])
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
