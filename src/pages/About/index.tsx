@@ -18,6 +18,7 @@ import { WavesSvg } from "../../components/atoms/WaveSvg";
 import { Text } from "../../components/atoms/Text";
 import { device } from "../../utils/breakpoints";
 import { useMediaQuery } from "../../utils/useMediaQuery";
+import { colors } from "../../components/enums";
 
 // 3D Model values
 const position: Vector3 = [-0.3, 1, 0]
@@ -26,7 +27,7 @@ const scale = 0.65
 
 const TextShadow = ({ children }: any) => {
   return (
-    <b style={{ color: '#D9AD0A', textShadow: "3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }}>
+    <b style={{ color: colors.orange, textShadow: "3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000" }}>
       {children}
     </b>
   )
@@ -93,7 +94,7 @@ export default function About() {
       <InfoWithMountains>
         <>
           <div className="dissapearLeft z-50" style={{
-            gridColumn: matchesLaptopAndUp ? '2/6' : '2/12',
+            gridColumn: matchesLaptopAndUp ? '2/8' : '2/12',
             gridRow: matchesLaptopAndUp ? '2/2' : '1/3',
             marginTop: matchesLaptopAndUp ? '' : '6em'
           }}>

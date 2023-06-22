@@ -6,34 +6,42 @@ import OnlySun from "../../components/atoms/OnlySun";
 import styled from "styled-components";
 import { Text } from "../../components/atoms/Text";
 import Plant from '/assets/plant.png'
+import { colors } from "../../components/enums";
+import { useMediaQuery } from "../../utils/useMediaQuery";
+import { device } from "../../utils/breakpoints";
 
-const ContactFormContainer = styled.div`
-padding-top: 8em;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+const ContactFormContainer = styled.div<{ matchesLaptop: boolean }>`
+  padding-top: 8em;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: ${({ matchesLaptop }) => matchesLaptop ? '0' : '0 32px'} ;
 `
 
-const Form = styled.form`
-position: relative;
-overflow: hidden;
-margin-top: 4em;
-width: 35%;
-&>.hidden {
-  position: absolute;
-  left: 600px;
-  top: 0;
-}
+const Form = styled.form <{ matchesLaptop: boolean }> `
+  position: relative;
+  overflow: hidden;
+  margin-top:${({ matchesLaptop }) => matchesLaptop ? '4em' : '2em'};
+  width: 35%;
+  font-size: ${({ matchesLaptop }) => matchesLaptop ? 'auto' : '32px'};
+  &>.hidden {
+    position: absolute;
+    left: 100%;
+    top: 0;
+  }
 `
 
 const Input = styled.input`
-text-decoration: none;
-background: none;
-border-bottom: 1px solid white;
-&:focus-visible {
-  outline: none;
-}
+  text-decoration: none;
+  background: none;
+  border-bottom: 1px solid white;
+  &:focus-visible {
+    outline: none;
+  }
 `
 
 type InputsType = {
@@ -45,8 +53,8 @@ type InputsType = {
   visible: boolean;
 }
 
-type InputWithLabelType = { value: string | number | string | [] | undefined, setInputs: Dispatch<SetStateAction<InputsType[]>>, type: string, visible: boolean, ref: RefObject<HTMLDivElement>, label: string, inputId: string };
-const InputWithLabel = ({ label, inputId, visible, type, value, setInputs }: InputWithLabelType, ref: ForwardedRef<HTMLDivElement>) => {
+type InputWithLabelType = { setInputError: Dispatch<SetStateAction<string | null>>, value: string | number | string | [] | undefined, setInputs: Dispatch<SetStateAction<InputsType[]>>, type: string, visible: boolean, ref: RefObject<HTMLDivElement>, label: string, inputId: string };
+const InputWithLabel = ({ setInputError, label, inputId, visible, type, value, setInputs }: InputWithLabelType, ref: ForwardedRef<HTMLDivElement>) => {
   return <div ref={ref} className={visible ? 'visible' : 'hidden'} style={{ display: 'flex', flexDirection: 'column' }}>
     <label htmlFor={inputId}>{label}</label>
     <Input
@@ -54,7 +62,10 @@ const InputWithLabel = ({ label, inputId, visible, type, value, setInputs }: Inp
       required
       type={type}
       onChange={
-        (e) => setInputs(prevInputs => prevInputs.map(input => input.label === label ? { ...input, value: e.target.value as string } : input))
+        (e) => {
+          setInputs(prevInputs => prevInputs.map(input => input.label === label ? { ...input, value: e.target.value as string } : input))
+          setInputError(null)
+        }
       }
       defaultValue={value}
     />
@@ -64,10 +75,6 @@ const InputWithLabelWithRef = forwardRef(InputWithLabel)
 
 const PlantImg = styled.img`
   width: 45vw;
-  position: absolute;
-  bottom: -625px;
-  left: -100px;
-  z-index: 10;
 `
 
 const Fish = styled.div<{ color: string }>`
@@ -92,17 +99,29 @@ const Fish = styled.div<{ color: string }>`
     display: block;
   }
 `
+
+const PlantsContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  z-index: 9;
+`
+
 export default function Contact() {
+  const matchesLaptop = useMediaQuery(device.laptop)
+
   const fish1 = useRef<HTMLDivElement | null>(null)
   const fish2 = useRef<HTMLDivElement | null>(null)
   const fish3 = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     swimmingFishAnimation(fish1, 100, 30);
-    swimmingFishAnimation(fish2, 10, 100, 4);
+    swimmingFishAnimation(fish2, 100, 100, 4);
     swimmingFishAnimation(fish3, 10, 50, 2);
-  }, [])
-
+  }, [matchesLaptop])
 
   return (
     <div className="animate--appear flex flex-col dissapearCenter overflow-hidden">
@@ -111,13 +130,17 @@ export default function Contact() {
         <WavesSvg />
         <UnderWavesSection style={{ height: '100vh' }}>
           <ContactForm />
+          <PlantsContainer>
+            <PlantImg src={Plant} />
+            <PlantImg style={{ transform: 'scaleX(-1)', width: '50vw' }} src={Plant} />
+          </PlantsContainer>
         </UnderWavesSection>
       </BottomSection>
-      <PlantImg src={Plant} />
-      <PlantImg style={{ transform: 'scaleX(-1)', left: '750px' }} src={Plant} />
-      <Fish ref={fish1} color="yellow" style={{ transform: 'scale(0.3) rotate(-45deg)' }} />
-      <Fish ref={fish2} color="blue" style={{ bottom: '-400px', left: '900px', transform: 'scale(0.3) rotate(-45deg)' }} />
-      <Fish ref={fish3} color="green" style={{ bottom: '-500px', left: '1000px', transform: 'scale(0.3) rotate(-45deg)' }} />
+      <Fish ref={fish1} color="yellow" style={{ left: matchesLaptop ? "0" : '200px', transform: 'scale(0.3) rotate(-45deg)' }} />
+      {matchesLaptop && <>
+        <Fish ref={fish2} color="blue" style={{ bottom: '-400px', left: '900px', transform: 'scale(0.3) rotate(-45deg)' }} />
+        <Fish ref={fish3} color="green" style={{ bottom: '-500px', left: '1000px', transform: 'scale(0.3) rotate(-45deg)' }} />
+      </>}
     </div>
   );
 }
@@ -153,7 +176,7 @@ function swimmingFishAnimation(fish: MutableRefObject<HTMLDivElement | null>, go
       left: fish.current?.offsetLeft + goRight + 'px',
       ease: 'power2.ease'
     });
-  // rotate
+  // look left
   tl.to(fish.current,
     {
       duration: 0.3,
@@ -191,7 +214,6 @@ function swimmingFishAnimation(fish: MutableRefObject<HTMLDivElement | null>, go
     });
 }
 
-// eslint-disable-next-line no-unused-vars
 function ContactForm() {
   const inputName = useRef<HTMLDivElement>(null);
   const inputMail = useRef<HTMLDivElement>(null);
@@ -199,6 +221,8 @@ function ContactForm() {
 
   const prevArrow = useRef<HTMLButtonElement>(null);
   const nextArrow = useRef<HTMLButtonElement>(null);
+
+  const matchesLaptop = useMediaQuery(device.laptop)
 
   const [inputs, setInputs] = useState<InputsType[]>([
     { value: '', type: 'text', label: "How do I call you?", inputId: 'name', inputRef: inputName, visible: true },
@@ -236,6 +260,7 @@ function ContactForm() {
     } else {
       setInputError(null)
     }
+
     const inputs_ = inputs;
     if (next !== null && current !== null) {
       inputs_[next].visible = true;
@@ -246,12 +271,12 @@ function ContactForm() {
       .eventCallback("onStart", () => disabledNext(true))
       .to(inputs_[current].inputRef.current, {
         opacity: 0,
-        duration: 0.3,
-        x: -100,
+        duration: .5,
+        x: -50,
         ease: "power3",
       })
       .to(inputs_[next].inputRef.current, {
-        duration: 0.3,
+        duration: 0.5,
         x: 0,
         ease: "power3",
         opacity: 1,
@@ -269,7 +294,6 @@ function ContactForm() {
     if (prev !== null && current !== null) {
       inputs_[prev].visible = true;
     } else return;
-
 
     gsap
       .timeline()
@@ -293,13 +317,14 @@ function ContactForm() {
       });
   };
 
-  return <ContactFormContainer className="dissapearLeft">
-    <Text size="large">Let’s <b style={{ color: '#DF3600' }}>work</b> together!</Text>
+  return <ContactFormContainer matchesLaptop={matchesLaptop} className="dissapearLeft">
+    <Text size="large">Let’s <b style={{ color: colors.orange, background: colors.blue, borderRadius: '30px', padding: '0 20px' }}>work</b> together!</Text>
     <Text size="small">Any <b>feedback</b>, <b>questions</b> or <b>project</b> in mind?</Text>
-    <Form id="contactForm" onSubmit={(e) => e.preventDefault}>
+    <Form matchesLaptop={matchesLaptop} id="contactForm" onSubmit={(e) => e.preventDefault}>
       {inputs.map(input => {
         return (
           <InputWithLabelWithRef
+            setInputError={setInputError}
             ref={input.inputRef}
             setInputs={setInputs}
             value={input.value ? input.value : ''}
@@ -313,33 +338,39 @@ function ContactForm() {
       })}
     </Form>
     {inputError && <>{inputError}</>}
-    <div className="flex flex-row mx-auto relative">
+    <div className="flex flex-row mx-auto relative" style={{ display: matchesLaptop ? 'flex' : 'auto', flexDirection: matchesLaptop ? 'row' : 'column' }}>
       {getInputsPos()[2] !== null && (
-        <button
+        <Button
+          matchesLaptop={matchesLaptop}
           onClick={() => handlePrevClick()}
           ref={prevArrow}
           className={formButtonsClassNames}
         >
           Back
-        </button>
+        </Button>
       )}
       {getInputsPos()[1] === null ? (
-        <button
+        <Button
+          matchesLaptop={matchesLaptop}
           className={formButtonsClassNames}
           onClick={() => ''}
         >
           Send
-        </button>
+        </Button>
       ) : (
-        <button
+        <Button
+          matchesLaptop={matchesLaptop}
           onClick={() => handleNextClick()}
           ref={nextArrow}
           className={formButtonsClassNames}
         >
           Next
-        </button>
+        </Button>
       )}
     </div>
   </ContactFormContainer>;
 }
+const Button = styled.button<{ matchesLaptop: boolean }>`
+  font-size: ${({ matchesLaptop }) => matchesLaptop ? 'auto' : '32px'};
+`
 

@@ -9,6 +9,7 @@ import { DescriptionButton } from './styles'
 import { MainModelContainer } from "./MainModelContainer"
 import { Text } from '../../components/atoms/Text'
 import styled from 'styled-components';
+import { colors } from '../../components/enums';
 
 const MainContainer = styled.div`
     display: grid;
@@ -35,6 +36,7 @@ const Greetings = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
       text-align: center;
       width: 90%
     }
@@ -46,8 +48,7 @@ const Greetings = styled.div`
       @media ${device.maxTablet} {
         width: 50%;
         margin: auto;
-        background: #0000003c;
-
+        background: ${colors.blue};
       }
     }
   `
@@ -58,21 +59,29 @@ const defaultRotation: Euler = [0.2, -0.6, 0.2]
 const defaultScale = 0.7
 
 export default function Main() {
-  const matchesTabletAndUp = useMediaQuery(device.tablet)
+  const matchesLaptopAndUp = useMediaQuery(device.laptop)
   // 3D Model values
   const [position, setPosition] = useState<Vector3>(defaultPosition)
   const [rotation, setRotation] = useState<Euler>(defaultRotation)
   const [scale] = useState<number>(defaultScale)
 
   useEffect(() => {
-    if (!matchesTabletAndUp) {
+    if (!matchesLaptopAndUp) {
       setPosition([0.5, 0.5, -2])
       setRotation([.5, 0.6, -0.2])
     } else {
       setPosition(defaultPosition)
       setRotation(defaultRotation)
     }
-  }, [matchesTabletAndUp])
+  }, [matchesLaptopAndUp])
+
+  const ButtonsContainer = styled.div`
+    display: flex;
+    gap: 32px;
+    justify-content: ${!matchesLaptopAndUp ? 'center' : 'start'};
+    flex-direction: ${!matchesLaptopAndUp ? 'column' : 'row'};
+    width: ${matchesLaptopAndUp ? '100%' : '50%'};
+  `
 
   return (
     <MainContainer
@@ -91,20 +100,25 @@ export default function Main() {
         }}>
           Web UI Developer
         </Text>
-        <DescriptionButton style={{ fontSize: 16 }}>
-          download cv
-        </DescriptionButton>
+        <ButtonsContainer>
+          <DescriptionButton onClick={() => ''} style={{ fontSize: 24 }}>
+            Get In Touch!
+          </DescriptionButton>
+          <DescriptionButton style={{ fontSize: 16 }}>
+            download cv
+          </DescriptionButton>
+        </ButtonsContainer>
       </Greetings>
       {/* Right */}
       <MainModelContainer style={{
-        opacity: matchesTabletAndUp ? 1 : .5
+        opacity: matchesLaptopAndUp ? 1 : .5
       }} className="animate--appear dissapearRight" >
         <Suspense fallback={null}>
           <Canvas>
             <OrbitControls />
-            <hemisphereLight groundColor={'#00ADB5'} intensity={0.1} />
-            <directionalLight color={'#00ADB5'} position={[5, 1, -19]} intensity={0.4} />
-            <directionalLight color={'#00ADB5'} position={[-500, 1, -100]} intensity={0.3} />
+            <hemisphereLight groundColor={colors.lightBlue} intensity={0.1} />
+            <directionalLight color={colors.lightBlue} position={[5, 1, -19]} intensity={0.4} />
+            <directionalLight color={colors.lightBlue} position={[-500, 1, -100]} intensity={0.3} />
             <directionalLight position={[5, 1, 10]} intensity={1} />
             <Model bbanchor={true} laptop={true} position={position} rotation={rotation} scale={scale} />
           </Canvas>

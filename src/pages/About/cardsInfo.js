@@ -14,15 +14,18 @@ const art = {
   images: [
     {
       path: MandarinaGirl,
-      selected: true
+      selected: true,
+      alt: 'Girl sit over a mandarine'
     },
     {
       path: BlondGirl,
-      selected: false
+      selected: false,
+      alt: 'Blond girl doing some pose with her hands up'
     },
     {
       path: Kid,
-      selected: false
+      selected: false,
+      alt: 'Sad looking kid?'
     }
   ],
   title: 'Art',
@@ -36,19 +39,23 @@ const catos = {
   images: [
     {
       path: wishyPiso,
-      selected: true
+      selected: true,
+      alt: 'Black cat laying down with her feet legs in a cute pose'
     },
     {
       path: wishyBalcon,
-      selected: false
+      selected: false,
+      alt: 'Black cat looking at a balcony'
     },
     {
       path: mesh,
-      selected: false
+      selected: false,
+      alt: 'White cat over a persons neck'
     },
     {
       path: wishyMaria,
-      selected: false
+      selected: false,
+      alt: 'White cat laying over bigger black cat'
     }
   ],
   title: 'Catos',
@@ -59,7 +66,8 @@ const music = {
   images: [
     {
       path: Music,
-      selected: true
+      selected: true,
+      alt: 'Photo of an album cover'
     }
   ],
   title: 'Music',

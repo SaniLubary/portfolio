@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Navbar from "./components/organisms/Navbar";
-import Menus from "./components/enums";
+import { pages } from "./components/enums";
 
 import "./app.scss";
 
@@ -9,6 +9,7 @@ import Main from "./pages/Main";
 import Experience from "./pages/Experience";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import MenuDrawer from "./components/organisms/MenuDrawer";
 
 export interface View {
   current: string;
@@ -17,9 +18,11 @@ export interface View {
 
 function App() {
   const [view, setView] = useState<View>({
-    current: Menus.Main,
+    current: pages.Main,
     waitingAnimation: "",
   });
+
+  const [openedMenuDrawer, setOpenedMenuDrawer] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -27,10 +30,8 @@ function App() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {/* Header */}
-      <Navbar setView={setView} view={view} />
-
-      {/* Body */}
+      <Navbar setOpenedMenuDrawer={setOpenedMenuDrawer} setView={setView} view={view} />
+      {openedMenuDrawer && <MenuDrawer openedMenuDrawer={openedMenuDrawer} setOpenedMenuDrawer={setOpenedMenuDrawer} setView={setView} view={view} />}
       <Body menu={view.waitingAnimation !== "" ? view.waitingAnimation : view.current} />
     </div>
   );
@@ -54,15 +55,15 @@ function customRootHtmlCss(action: 'add' | 'remove') {
 function Body({ menu }: { menu: string }) {
   customRootHtmlCss('remove')
   switch (menu) {
-    case Menus.Main:
+    case pages.Main:
       customRootHtmlCss('add')
       return <Main />
-    case Menus.About:
+    case pages.About:
       return <About />
-    case Menus.Experience:
+    case pages.Experience:
       customRootHtmlCss('add')
       return <Experience />
-    case Menus.Contact:
+    case pages.Contact:
       customRootHtmlCss('remove')
       return <Contact />
     default:

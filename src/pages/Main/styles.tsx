@@ -1,12 +1,13 @@
 import styled from 'styled-components'
+import { colors } from '../../components/enums'
 
 export const Button = styled.button`
   margin-top: 15px;
   padding: 0.5em 32px;
   letter-spacing: '0px';
-  fontSize: 16;
+  font-size: 16;
   
-  border: 3px solid #00ADB5;
+  border: 3px solid ${colors.lightBlue};
   box-sizing: border-box;
   border-radius: 43px;
   
@@ -15,7 +16,7 @@ export const Button = styled.button`
   line-height: 31px;
 
   cursor: pointer;
-  color: #00ADB5;
+  color: ${colors.lightBlue};
 `
 
 export const MainModelContainer = styled.div`

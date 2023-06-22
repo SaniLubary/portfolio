@@ -1,12 +1,13 @@
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import styled from "styled-components";
+import { colors } from "../../enums";
 
 const SeparatorLine = styled.div`
   width: 80%;
   height: 4px;
   margin: 6px auto;
-  background-color: #263645;
+  background-color: ${colors.grey};
   align-self: flex-start;
 `
 
@@ -14,11 +15,12 @@ interface CardProps {
   cardInfoInit: {
     images: {
       path: string;
+      id?: string;
       selected: boolean;
       alt?: string;
     }[];
     title: string;
-    details: string;
+    details: { imgId: string, text: string }[] | string;
     icons?: { path: string, icon: string }[];
   };
 }
@@ -64,8 +66,8 @@ const Card = ({ cardInfoInit }: CardProps) => {
     setCardInfo({
       images: cardInfo.images.map((oldImg) =>
         oldImg.path === img.path
-          ? { path: img.path, selected: true }
-          : { path: oldImg.path, selected: false }
+          ? { path: img.path, selected: true, id: img.id }
+          : { path: oldImg.path, selected: false, id: img.id }
       ),
       title: cardInfo.title,
       details: cardInfo.details,
@@ -182,7 +184,15 @@ const Card = ({ cardInfoInit }: CardProps) => {
       {/* Card Body */}
       <section className="hobbies__cards__card__body">
         <h1 className="hobbies__cards__card__body__title">{cardInfo.title}</h1>
-        <p>{cardInfo.details}</p>
+        <p>{typeof cardInfo.details === 'string' ? cardInfo.details : cardInfo.images.map(img => {
+          if (img.selected) {
+            return (
+              <>
+                {typeof cardInfo.details !== 'string' && cardInfo.details.map(detail => detail.imgId === img.id && <>{detail.text}</>)}
+              </>
+            )
+          } else <></>
+        })}</p>
       </section>
 
       {(cardInfo?.icons && cardInfo.icons.length > 0) && <>

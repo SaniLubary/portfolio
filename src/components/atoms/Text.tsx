@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
+import { colors } from '../enums';
 
 const small = '16px'
 const medium = '44px/1.2'
@@ -13,7 +14,7 @@ const TextDefaults = styled.span<{ size: string }>`
   font-style: normal;
   font-weight: normal;
   letter-spacing: 0px;
-  color: #EEEEEE;
+  color: ${colors.white};
   font: ${({ size }) => size} "Poppins", Helvetica, Arial, serif;
 `
 

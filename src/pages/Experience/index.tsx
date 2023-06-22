@@ -6,6 +6,7 @@ import adusSvg from "/assets/icons/workPlaces/adus.svg";
 import andesSvg from "/assets/icons/workPlaces/andes.svg";
 import globantSvg from "/assets/icons/workPlaces/globant.svg";
 import muniSvg from "/assets/icons/workPlaces/muni.svg";
+import globantLogo from "/assets/globantLogo.png"
 
 // Components
 import GlobantDescription from "./GlobantDescription";
@@ -16,6 +17,8 @@ import MuniDescription from "./MuniDescription";
 import AdusDescription from "./AdusDescription";
 import { device } from "../../utils/breakpoints";
 import { useMediaQuery } from "../../utils/useMediaQuery";
+import { colors } from "../../components/enums";
+import Card from "../../components/organisms/Card";
 
 const workPlacesLogos = [
   { src: globantSvg, alt: 'Globant logo', description: <GlobantDescription /> },
@@ -38,28 +41,59 @@ export default function Experience() {
         <>
           <div className="dissapearRight z-50"
             style={{
-              gridColumn: matchesLaptopAndUp ? '6/12' : '1/12',
-              gridRow: '2/4',
+              gridColumn: matchesLaptopAndUp ? '6/12' : '2/12',
+              gridRow: matchesLaptopAndUp ? '2/4' : '2/6',
               display: 'flex',
               flexDirection: 'column',
+              alignItems: matchesLaptopAndUp ? 'end' : 'center',
+              gap: matchesLaptopAndUp ? '' : '50px',
             }}
           >
             <ExperienceTitle />
 
-            <div
-              className="flex justify-end items-center align-middle"
-              style={{
-                flexDirection: matchesLaptopAndUp ? 'row' : 'column',
-                alignItems: matchesLaptopAndUp ? 'center' : 'end',
-              }}>
-              {workPlacesLogos.map(work => {
-                return <img key={work.alt} onClick={() => handleLogoClick(work.description)} className="p-2 grayToColor cursor-pointer" src={work.src} alt={work.alt} />
-              })}
-            </div>
+            {!matchesLaptopAndUp && (
+              <Card cardInfoInit={
+                {
+                  images: [
+                    {
+                      path: globantLogo,
+                      selected: true,
+                      id: 'globant',
+                      alt: 'globant logo'
+                    },
+                    {
+                      path: globantLogo,
+                      id: 'other',
+                      selected: false,
+                      alt: 'globant logo'
+                    }
+                  ],
+                  title: 'Globant',
+                  details: [{ imgId: 'globant', text: 'I worked at globant doing this and that' }, { imgId: 'other', text: 'Other place' }]
+                }
+              } />
+            )}
 
-            <div className="w-4/5 flex flex-col text-right self-end" style={{ color: '#EEEEEE' }}>
-              {description && description}
-            </div>
+            {matchesLaptopAndUp && (
+              <>
+                <div
+                  style={{
+                    display: 'flex',
+                    textAlign: 'center',
+                    flexDirection: matchesLaptopAndUp ? 'row' : 'column',
+                    alignItems: 'center',
+                    justifyContent: matchesLaptopAndUp ? 'end' : 'center',
+                    gap: matchesLaptopAndUp ? '' : '50px',
+                  }}>
+                  {workPlacesLogos.map(work => {
+                    return <img key={work.alt} onClick={() => handleLogoClick(work.description)} className="p-2 grayToColor cursor-pointer" src={work.src} alt={work.alt} />
+                  })}
+                </div>
+                <div className="w-4/5 flex flex-col text-right self-end" style={{ color: colors.white }}>
+                  {description && description}
+                </div>
+              </>
+            )}
           </div>
         </>
       </InfoWithMountains>

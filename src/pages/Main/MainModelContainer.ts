@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const MainModelContainer = styled.div`
   position: fixed;
   height: 100%;
