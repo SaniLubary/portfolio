@@ -3,7 +3,6 @@ import { colors } from "../../components/enums"
 
 const GlobantDescription = () => {
   return <>
-    <Text size="medium" className="font-extrabold text-2xl">Globant</Text>
     <Text size="small">
       I've worked for accounts
       <b style={{ color: colors.orange }}>
@@ -16,7 +15,7 @@ const GlobantDescription = () => {
       <b style={{ color: colors.orange }}>
         &nbsp; Dropbox &nbsp;
       </b>
-      as a Web UI Dev on Apps with <b>Typescript - React - Redux - Jest - Atomic Design - MUI - AG-Grid</b>.
+      with <b>Typescript - React - Redux - Jest - Atomic Design - MUI - AG-Grid and much more</b>.
     </Text>
   </>
 }

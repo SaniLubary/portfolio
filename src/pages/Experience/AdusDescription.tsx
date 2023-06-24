@@ -1,10 +1,10 @@
 import { Text } from "../../components/atoms/Text"
+import { colors } from "../../components/enums"
 
 const AdusDescription = () => {
   return <>
-    <Text size="medium" className="font-extrabold text-2xl">ADUS / IPVU</Text>
     <Text size="small">
-      Started my journey here, doing bugfixes, learning Git, SCRUM, Kanban, Docker, PHP, MySQL and a bunch of soft skills
+      Started my journey here, doing bugfixes, learning Git, SCRUM, Kanban, Docker, PHP, MySQL and a bunch of <b style={{ color: colors.orange }}>soft skills</b>
     </Text>
   </>
 }

@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { MutableRefObject, ReactElement, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import styled from "styled-components";
 import { colors } from "../../enums";
@@ -12,15 +12,15 @@ const SeparatorLine = styled.div`
 `
 
 interface CardProps {
-  cardInfoInit: {
+  data: {
     images: {
       path: string;
       id?: string;
       selected: boolean;
       alt?: string;
     }[];
-    title: string;
-    details: { imgId: string, text: string }[] | string;
+    title?: string;
+    details: { imgId: string, text: string | ReactElement, title: string }[] | string;
     icons?: { path: string, icon: string }[];
   };
 }
@@ -44,8 +44,9 @@ const floatAnimation = (ref: MutableRefObject<any>) => {
     })
 }
 
-const Card = ({ cardInfoInit }: CardProps) => {
-  const [cardInfo, setCardInfo] = useState(cardInfoInit);
+const Card = ({ data }: CardProps) => {
+  const [cardData, setCardData] = useState(data);
+  const [currentImg, setCurrentImg] = useState(cardData.images[0])
 
   const refImage = useRef<HTMLImageElement | null>(null);
   useEffect(() => {
@@ -55,7 +56,7 @@ const Card = ({ cardInfoInit }: CardProps) => {
     }
   }, [])
 
-  const handleButtonClick = (img: CardProps["cardInfoInit"]["images"][0]) => {
+  const handleButtonClick = (img: CardProps["data"]["images"][0]) => {
     if (img.selected || !refImage?.current) return
 
     img.selected = true
@@ -63,14 +64,14 @@ const Card = ({ cardInfoInit }: CardProps) => {
     fadeOutCardImage(refImage.current)
     centerCardImage()
 
-    setCardInfo({
-      images: cardInfo.images.map((oldImg) =>
+    setCardData({
+      images: cardData.images.map((oldImg) =>
         oldImg.path === img.path
           ? { path: img.path, selected: true, id: img.id }
           : { path: oldImg.path, selected: false, id: img.id }
       ),
-      title: cardInfo.title,
-      details: cardInfo.details,
+      title: cardData.title,
+      details: cardData.details,
     });
   }
 
@@ -95,9 +96,9 @@ const Card = ({ cardInfoInit }: CardProps) => {
   }
 
   const handleImageClick = () => {
-    if (cardInfo.images.length === 1) return
+    if (cardData.images.length === 1) return
 
-    const images = cardInfo.images;
+    const images = cardData.images;
 
     // Logic to loop over images on click
     for (let i = 0; i < images.length; i++) {
@@ -136,16 +137,17 @@ const Card = ({ cardInfoInit }: CardProps) => {
     images.forEach((img) => {
       if (img.selected === true && refImage.current) {
         refImage.current.src = img.path;
+        setCurrentImg(img)
         centerCardImage()
         fadeOutCardImage(refImage.current)
       }
     });
 
-    setCardInfo({
+    setCardData({
       images: images,
-      title: cardInfo.title,
-      details: cardInfo.details,
-      icons: cardInfo.icons
+      title: cardData.title,
+      details: cardData.details,
+      icons: cardData.icons
     });
   }
 
@@ -160,14 +162,14 @@ const Card = ({ cardInfoInit }: CardProps) => {
         <img
           ref={refImage}
           className="relative m-auto w-full scale-150"
-          src={cardInfoInit.images[0].path}
-          alt={cardInfoInit.images[0].alt ? cardInfoInit.images[0].alt : 'Imagen sin descripcion'}
+          src={data.images[0].path}
+          alt={data.images[0].alt ? data.images[0].alt : 'Imagen sin descripcion'}
         />
       </div>
 
       {/* Image selection */}
       <div className="hobbies__cards__card__selection">
-        {cardInfo.images.map((img) => {
+        {cardData.images.map((img) => {
           let selected = img.selected ? "selected" : "not-selected";
           return (
             <div
@@ -183,23 +185,27 @@ const Card = ({ cardInfoInit }: CardProps) => {
 
       {/* Card Body */}
       <section className="hobbies__cards__card__body">
-        <h1 className="hobbies__cards__card__body__title">{cardInfo.title}</h1>
-        <p>{typeof cardInfo.details === 'string' ? cardInfo.details : cardInfo.images.map(img => {
-          if (img.selected) {
-            return (
-              <>
-                {typeof cardInfo.details !== 'string' && cardInfo.details.map(detail => detail.imgId === img.id && <>{detail.text}</>)}
-              </>
-            )
-          } else <></>
-        })}</p>
+        {typeof cardData.details === 'string' && (
+          <>
+            <h1 className="hobbies__cards__card__body__title">{cardData.title}</h1>
+            <p>{cardData.details}</p>
+          </>
+        )}
+        {typeof cardData.details !== 'string' && cardData.details.map((detail) => {
+          if (detail.imgId === currentImg.id) {
+            return <>
+              <h1 className="hobbies__cards__card__body__title">{detail.title}</h1>
+              <p>{detail.text}</p>
+            </>
+          }
+        })}
       </section>
 
-      {(cardInfo?.icons && cardInfo.icons.length > 0) && <>
+      {(cardData?.icons && cardData.icons.length > 0) && <>
         <div className="mt-auto mb-2">
           <SeparatorLine />
           <div className="flex justify-center">
-            {cardInfo.icons.map(icon => <>
+            {cardData.icons.map(icon => <>
               <a target="_blank" key={icon.path} href={icon.path}>
                 <img style={{ height: '24px', margin: '5px' }} src={icon.icon} />
               </a>

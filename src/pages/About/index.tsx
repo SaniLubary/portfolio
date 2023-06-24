@@ -120,9 +120,9 @@ export default function About() {
               </h1>
 
               <div className="hobbies__cards">
-                <Card cardInfoInit={art}></Card>
-                <Card cardInfoInit={catos}></Card>
-                <Card cardInfoInit={music}></Card>
+                <Card data={art}></Card>
+                <Card data={catos}></Card>
+                <Card data={music}></Card>
               </div>
 
               <ModelContainer style={{

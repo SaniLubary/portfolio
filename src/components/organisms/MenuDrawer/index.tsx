@@ -3,13 +3,10 @@ import { Link, NavMenu } from "../Navbar";
 import updateViewPage from "../../../utils/updateViewPage";
 import { colors, pages } from "../../enums";
 import { View } from "../../../App";
-import React, { Suspense, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import HamburgerIcon from "../../atoms/HamburgerIcon";
 import { DescriptionButton } from "../../../pages/Main/styles";
-import { ModelContainer } from "../../../pages/About/styles";
-import { Canvas, Euler, Vector3 } from "@react-three/fiber";
-import Model from "../../atoms/Santi";
 
 const DrawerContainer = styled.div`
   position: fixed;
@@ -26,10 +23,6 @@ const DrawerContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 `
-// 3D Model values
-const position: Vector3 = [-0.3, 1, 0]
-const rotation: Euler = [0.8, -5.9, -0.5]
-const scale = 0.65
 
 const navigation = [pages.Experience, pages.About, pages.Contact];
 
@@ -85,17 +78,6 @@ export default function MenuDrawer(props: MenuDrawerProps) {
           </Link>
         ))}
       </NavMenu>
-      <div className="dissapearRight">
-        <Suspense fallback={null}>
-          <Canvas className='animate--appear'>
-            <directionalLight color={'#00ADB5'} position={[5, 1, -19]} intensity={0.2} />
-            <directionalLight color={'#00ADB5'} position={[-500, 1, -100]} intensity={1} />
-            <directionalLight position={[5, 1, 10]} intensity={1} />
-            <Model position={position} rotation={rotation} scale={scale} />
-          </Canvas>
-        </Suspense>
-      </div>
-
       <DescriptionButton onClick={() => ''} style={{ fontSize: 24, marginBottom: '38px' }}>
         Close
       </DescriptionButton>
