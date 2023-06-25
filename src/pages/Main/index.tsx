@@ -83,8 +83,6 @@ export default function Main() {
     }
   }, [matchesLaptopAndUp])
 
-
-
   return (
     <MainContainer
       className='animate--appear'

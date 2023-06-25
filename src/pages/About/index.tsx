@@ -21,9 +21,9 @@ import { useMediaQuery } from "../../utils/useMediaQuery";
 import { colors } from "../../components/enums";
 
 // 3D Model values
-const position: Vector3 = [-0.3, 1, 0]
-const rotation: Euler = [0.8, -5.9, -0.5]
-const scale = 0.65
+const defaultPosition: Vector3 = [-0.3, 1, 0]
+const defaultRotation: Euler = [0.8, -5.9, -0.5]
+const defaultScale = 0.65
 
 const TextShadow = ({ children }: any) => {
   return (
@@ -44,6 +44,22 @@ export default function About() {
   const textRef = useRef<any | null>(null)
   const [textI, setTextI] = useState(0)
   const matchesLaptopAndUp = useMediaQuery(device.laptop)
+
+  // 3D Model values
+  const [position, setPosition] = useState<Vector3>(defaultPosition)
+  const [rotation, setRotation] = useState<Euler>(defaultRotation)
+  const [scale] = useState<number>(defaultScale)
+
+  useEffect(() => {
+    if (!matchesLaptopAndUp) {
+      setPosition([-1, 1, -5])
+      setRotation([.5, 0.6, -0.2])
+    } else {
+      setPosition(defaultPosition)
+      setRotation(defaultRotation)
+    }
+  }, [matchesLaptopAndUp])
+
 
   const floatAnimation = (ref: MutableRefObject<any>) => {
     const tl = gsap.timeline()
@@ -91,7 +107,7 @@ export default function About() {
 
   return (
     <>
-      <InfoWithMountains>
+      <InfoWithMountains noSun>
         <>
           <div className="dissapearLeft z-50" style={{
             gridColumn: matchesLaptopAndUp ? '2/8' : '2/12',
@@ -126,9 +142,8 @@ export default function About() {
               </div>
 
               <ModelContainer style={{
-                top: matchesLaptopAndUp ? '' : '-2em',
-                transform: matchesLaptopAndUp ? '' : 'scale(0.6)',
-                left: matchesLaptopAndUp ? '' : '3  em'
+                top: matchesLaptopAndUp ? '' : '-10rem',
+                transform: matchesLaptopAndUp ? '' : 'scale(1.5)',
               }} leftSide={true} className="dissapearRight">
                 <Suspense fallback={null}>
                   <Canvas ref={canvasRef} className='animate--appear'>

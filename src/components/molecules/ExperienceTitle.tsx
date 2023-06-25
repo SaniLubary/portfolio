@@ -12,7 +12,7 @@ function ExperienceTitle(): JSX.Element {
     <Text size="medium" className="text-right">
       I've worked at
     </Text>
-  </div> : <Text size="medium" className="text-center w-1/2">Where I've worked at</Text>;
+  </div> : <Text size="medium" className="text-center w-3/4">Where I've worked at</Text>;
 }
 
 export default ExperienceTitle

@@ -3,10 +3,11 @@ import Mountains from "../atoms/Mountains";
 
 interface IInfoWithMountains {
   flip?: boolean;
+  noSun?: boolean;
   children: React.ReactElement;
 }
 
-const InfoWithMountains = ({ children, flip = false }: IInfoWithMountains) => {
+const InfoWithMountains = ({ children, flip = false, noSun = false }: IInfoWithMountains) => {
   return <div className='animate--appear'
     style={{
       display: 'grid',
@@ -15,7 +16,7 @@ const InfoWithMountains = ({ children, flip = false }: IInfoWithMountains) => {
     }}>
     <Suspense fallback={null}>
       <div className={`dissapearCenter fixed -bottom-24 ${flip ? ' left-0 -scale-x-100 ' : 'right-0'}`}>
-        <Mountains />
+        <Mountains noSun={noSun} />
       </div>
     </Suspense>
 
