@@ -1,12 +1,14 @@
-import styled from "styled-components";
-import { Link, NavMenu } from "../Navbar";
-import updateViewPage from "../../../utils/updateViewPage";
-import { colors, pages } from "../../enums";
-import { View } from "../../../App";
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import styled from "styled-components";
+
+import { Link, NavMenu } from "../Navbar";
+import { View } from "../../../App";
 import HamburgerIcon from "../../atoms/HamburgerIcon";
 import { DescriptionButton } from "../../../pages/Main/styles";
+
+import updateViewPage from "../../../utils/updateViewPage";
+import { colors, pages } from "../../enums";
 
 const DrawerContainer = styled.div`
   position: fixed;
@@ -16,7 +18,6 @@ const DrawerContainer = styled.div`
   
   width: 55vw;
   height: 100%;
-  border-radius: 32px 0 0 32px;
 
   display: flex;
   flex-direction: column;
@@ -32,6 +33,7 @@ interface MenuDrawerProps {
   setOpenedMenuDrawer: React.Dispatch<React.SetStateAction<boolean>>
   openedMenuDrawer: boolean
 }
+
 export default function MenuDrawer(props: MenuDrawerProps) {
   const [focusView, setFocusView] = useState(pages.Main)
 
@@ -43,16 +45,18 @@ export default function MenuDrawer(props: MenuDrawerProps) {
     if (!drawerContainer) return
 
     const tl = gsap.timeline()
-    tl.to(drawerContainer.current, {
-      duration: 0,
-      x: '100%',
-    })
-    tl.to(drawerContainer.current, {
-      duration: .3,
-      x: 0,
-    })
-
-  }, [])
+    if (props.openedMenuDrawer) {
+      tl.to(drawerContainer.current, {
+        duration: .3,
+        x: 0,
+      })
+    } else {
+      tl.to(drawerContainer.current, {
+        duration: .3,
+        x: '100%',
+      })
+    }
+  }, [props.openedMenuDrawer])
 
   return (
     <DrawerContainer ref={drawerContainer}>
@@ -70,7 +74,6 @@ export default function MenuDrawer(props: MenuDrawerProps) {
         {navigation.map((menu, index) => (
           <Link
             key={index}
-            // style={{ color: colors.blue, margin: 0 }}
             onClick={() => showPage(menu)}
             focusView={focusView === menu}
           >
@@ -78,7 +81,7 @@ export default function MenuDrawer(props: MenuDrawerProps) {
           </Link>
         ))}
       </NavMenu>
-      <DescriptionButton onClick={() => ''} style={{ fontSize: 24, marginBottom: '38px' }}>
+      <DescriptionButton onClick={() => props.setOpenedMenuDrawer(false)} style={{ fontSize: 24, marginBottom: '38px' }}>
         Close
       </DescriptionButton>
     </DrawerContainer>

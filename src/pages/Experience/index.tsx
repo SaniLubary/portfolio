@@ -61,7 +61,7 @@ export default function Experience() {
           <div className="dissapearRight z-50"
             style={{
               gridColumn: matchesLaptopAndUp ? '6/12' : '2/12',
-              gridRow: matchesLaptopAndUp ? '2/4' : '2/6',
+              gridRow: matchesLaptopAndUp ? '2/5' : '2/6',
               display: 'flex',
               flexDirection: 'column',
               alignItems: matchesLaptopAndUp ? 'end' : 'center',

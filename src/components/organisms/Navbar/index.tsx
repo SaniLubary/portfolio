@@ -81,7 +81,7 @@ export default function Navbar(props: NavbarProps) {
             </Link>
           ))}
         </NavMenu>
-        : <div style={{ cursor: 'pointer' }} onClick={() => props.setOpenedMenuDrawer((prevVal) => !prevVal)}>
+        : <div style={{ cursor: 'pointer', gridColumn: '10/12' }} onClick={() => props.setOpenedMenuDrawer((prevVal) => !prevVal)}>
           <HamburgerIcon style={{ fill: 'white', transform: 'scale(.3)' }} />
         </div>}
     </Nav>
@@ -106,11 +106,15 @@ const Logo = styled.div<{ matchesLaptop: boolean }>`
 export const Link = styled.a<{ focusView: boolean }>`
   font: 28px/1.2 "Poppins", Helvetica, Arial, serif;
   color: ${({ focusView }) => focusView ? 'rgb(0, 174, 182)' : 'rgb(192, 192, 192)'};
-  text-align: end;
   margin-left: 24px;
+  text-align: end;
   &:hover {
     cursor: pointer;
     color: rgb(4, 158, 167); 
+  }
+  @media ${device.maxTablet} {
+    text-align: center;
+    margin-left: 0;
   }
   @media ${device.laptopL} {
     font-size: 32px;
@@ -128,7 +132,7 @@ const Nav = styled.nav<{ matchesLaptop: boolean }>`
   backdrop-filter: blur(4px);
   width: 100%;
   z-index: 999;
-  display: ${({ matchesLaptop }) => matchesLaptop ? 'grid' : 'flex'};
+  display: grid;
   justify-content: space-around;
   grid-template-columns: repeat(12, minmax(0, 1fr));
 `

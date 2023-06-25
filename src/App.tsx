@@ -31,7 +31,7 @@ function App() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <Navbar setOpenedMenuDrawer={setOpenedMenuDrawer} setView={setView} view={view} />
-      {openedMenuDrawer && <MenuDrawer openedMenuDrawer={openedMenuDrawer} setOpenedMenuDrawer={setOpenedMenuDrawer} setView={setView} view={view} />}
+      <MenuDrawer openedMenuDrawer={openedMenuDrawer} setOpenedMenuDrawer={setOpenedMenuDrawer} setView={setView} view={view} />
       <Body menu={view.waitingAnimation !== "" ? view.waitingAnimation : view.current} />
     </div>
   );

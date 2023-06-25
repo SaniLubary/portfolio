@@ -14,7 +14,7 @@ const InfoWithMountains = ({ children, flip = false }: IInfoWithMountains) => {
       gridTemplateRows: 'repeat(8, minmax(0, 1fr))'
     }}>
     <Suspense fallback={null}>
-      <div className={`dissapearCenter absolute -bottom-24 ${flip ? ' left-0 -scale-x-100 ' : 'right-0'}`}>
+      <div className={`dissapearCenter fixed -bottom-24 ${flip ? ' left-0 -scale-x-100 ' : 'right-0'}`}>
         <Mountains />
       </div>
     </Suspense>

@@ -12,7 +12,7 @@ export default function updateViewPage(props: NavbarProps, setFocusView: React.D
     const dissapearLeftElems = Array.from(document.getElementsByClassName("dissapearLeft"));
     const dissapearRightElems = Array.from(document.getElementsByClassName("dissapearRight"));
     const dissapearCenterElems = Array.from(document.getElementsByClassName("dissapearCenter"));
-
+    props.setOpenedMenuDrawer(false)
     gsap.timeline()
       .to(dissapearLeftElems,
         {
@@ -38,6 +38,8 @@ export default function updateViewPage(props: NavbarProps, setFocusView: React.D
           stagger: 0.2,
           ease: 'power3.in',
         }, "<")
-      .eventCallback('onComplete', () => props.setView({ current: menu_, waitingAnimation: '' }));
+      .eventCallback('onComplete', () => {
+        props.setView({ current: menu_, waitingAnimation: '' })
+      });
   };
 }

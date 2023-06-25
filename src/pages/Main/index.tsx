@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { OrbitControls } from '@react-three/drei'
 import { Canvas, Euler, Vector3 } from '@react-three/fiber'
 import { device } from "../../utils/breakpoints";
@@ -25,7 +25,7 @@ const MainContainer = styled.div`
   `
 
 const Greetings = styled.div`
-    grid-column: 2/8;
+    grid-column: 2/9;
     @media ${device.tablet} {
       grid-row: 4/7;
     }
@@ -53,6 +53,14 @@ const Greetings = styled.div`
     }
   `
 
+const ButtonsContainer = styled.div<{ matchesLaptopAndUp: boolean }>`
+display: flex;
+gap: 32px;
+justify-content: ${({ matchesLaptopAndUp }) => !matchesLaptopAndUp ? 'center' : 'start'};
+flex-direction: ${({ matchesLaptopAndUp }) => !matchesLaptopAndUp ? 'column' : 'row'};
+width: ${({ matchesLaptopAndUp }) => matchesLaptopAndUp ? '100%' : '50%'};
+`
+
 // 3D Model values
 const defaultPosition: Vector3 = [2.5, 0, 0]
 const defaultRotation: Euler = [0.2, -0.6, 0.2]
@@ -75,13 +83,7 @@ export default function Main() {
     }
   }, [matchesLaptopAndUp])
 
-  const ButtonsContainer = styled.div`
-    display: flex;
-    gap: 32px;
-    justify-content: ${!matchesLaptopAndUp ? 'center' : 'start'};
-    flex-direction: ${!matchesLaptopAndUp ? 'column' : 'row'};
-    width: ${matchesLaptopAndUp ? '100%' : '50%'};
-  `
+
 
   return (
     <MainContainer
@@ -100,7 +102,7 @@ export default function Main() {
         }}>
           Web UI Developer
         </Text>
-        <ButtonsContainer>
+        <ButtonsContainer matchesLaptopAndUp={matchesLaptopAndUp}>
           <DescriptionButton onClick={() => ''} style={{ fontSize: 24 }}>
             Get In Touch!
           </DescriptionButton>
@@ -113,16 +115,14 @@ export default function Main() {
       <MainModelContainer style={{
         opacity: matchesLaptopAndUp ? 1 : .5
       }} className="animate--appear dissapearRight" >
-        <Suspense fallback={null}>
-          <Canvas>
-            <OrbitControls />
-            <hemisphereLight groundColor={colors.lightBlue} intensity={0.1} />
-            <directionalLight color={colors.lightBlue} position={[5, 1, -19]} intensity={0.4} />
-            <directionalLight color={colors.lightBlue} position={[-500, 1, -100]} intensity={0.3} />
-            <directionalLight position={[5, 1, 10]} intensity={1} />
-            <Model bbanchor={true} laptop={true} position={position} rotation={rotation} scale={scale} />
-          </Canvas>
-        </Suspense>
+        <Canvas>
+          <OrbitControls />
+          <hemisphereLight groundColor={colors.lightBlue} intensity={0.1} />
+          <directionalLight color={colors.lightBlue} position={[5, 1, -19]} intensity={0.4} />
+          <directionalLight color={colors.lightBlue} position={[-500, 1, -100]} intensity={0.3} />
+          <directionalLight position={[5, 1, 10]} intensity={1} />
+          <Model bbanchor={true} laptop={true} position={position} rotation={rotation} scale={scale} />
+        </Canvas>
       </MainModelContainer >
     </MainContainer >
   )

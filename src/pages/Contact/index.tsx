@@ -26,7 +26,7 @@ const Form = styled.form <{ matchesLaptop: boolean }> `
   position: relative;
   overflow: hidden;
   margin-top:${({ matchesLaptop }) => matchesLaptop ? '4em' : '2em'};
-  width: 35%;
+  width: ${({ matchesLaptop }) => matchesLaptop ? '35%' : '90%'};
   font-size: ${({ matchesLaptop }) => matchesLaptop ? 'auto' : '32px'};
   &>.hidden {
     position: absolute;
@@ -71,6 +71,7 @@ const InputWithLabel = ({ setInputError, label, inputId, visible, type, value, s
     />
   </div>
 }
+
 const InputWithLabelWithRef = forwardRef(InputWithLabel)
 
 const PlantImg = styled.img`
